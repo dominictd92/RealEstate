@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/RealEstate</property>
+        <property name="connection.url">jdbc:mysql://triton.towson.edu-mysql:3306/ddange1db</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <mapping class="entities.AmenityEntity"/>
         <mapping class="entities.ApplicantEntity"/>

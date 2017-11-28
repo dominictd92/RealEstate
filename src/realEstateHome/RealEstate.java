@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import connection.ConnectionSetup;
 import utilities.Constants;
  
 
@@ -21,10 +22,11 @@ public class RealEstate {
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
         
+        //create all of the pages in the form or tabs
         tabbedPane.addTab("Home", createHomePane());
         tabbedPane.addTab("Properties", createPropertiesPane());
-        tabbedPane.addTab("Third", createRepairsPane());
- 
+        tabbedPane.addTab("Repairs", createRepairsPane());
+        
         pane.add(tabbedPane, BorderLayout.CENTER);
     }
  
@@ -50,6 +52,7 @@ public class RealEstate {
  
     public static void main(String[] args) {
         try {
+        	ConnectionSetup.connect();
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
@@ -59,7 +62,9 @@ public class RealEstate {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-        }
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
         /* Turn off metal's use of bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
          
