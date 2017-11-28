@@ -1,40 +1,5 @@
-
-/*
- * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *   - Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *
- *   - Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- *
- *   - Neither the name of Oracle or the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
- 
 package realEstateHome;
  
-/*
- * TabDemo.java
- */
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -44,19 +9,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import utilities.Constants;
  
+
 public class RealEstate {
-    final static int extraWindowWidth = 100;
  
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
- 
+        
         tabbedPane.addTab("Home", createHomePane());
-        tabbedPane.addTab("SecondPanel", createSecondPane());
+        tabbedPane.addTab("Properties", createPropertiesPane());
+        tabbedPane.addTab("Third", createRepairsPane());
  
         pane.add(tabbedPane, BorderLayout.CENTER);
     }
@@ -82,9 +49,7 @@ public class RealEstate {
     }
  
     public static void main(String[] args) {
-        /* Use an appropriate Look and Feel */
         try {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
@@ -110,19 +75,66 @@ public class RealEstate {
     public JPanel createHomePane() { 
     	@SuppressWarnings("serial")
 		JPanel card1 = new JPanel() {
-            //Make the panel wider than it really needs, so
-            //the window's wide enough for the tabs to stay
-            //in one row.
+            //Create the JPanels correct size. This can be done once. 
             public Dimension getPreferredSize() {
             	Dimension size = new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-                size.width += extraWindowWidth;
             	return size;
             }
         };
-        JLabel home = new JLabel(Constants.HOME);
-        home.setFont(Constants.HEADER_FONT);
-        home.setSize(Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
-        card1.add(home);
+        //clear the layout as it automatically sets the layout. 
+        card1.setLayout(null);
+        
+        JLabel header = new JLabel(Constants.HOME);
+        header.setFont(Constants.HEADER_FONT);
+        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
+        header.setHorizontalAlignment(JLabel.CENTER);
+        card1.add(header);
+        
+        JLabel devs = new JLabel(Constants.DEVELOPERS);
+        devs.setBounds(Constants.HEADER_X, Constants.PAGE_TITLE_HEIGHT, Constants.PAGE_TITLE_WIDTH, Constants.DEVELOPERS_HEIGHT);
+        devs.setHorizontalAlignment(JLabel.CENTER);
+        card1.add(devs);
+        
+        JTextArea pageInfo = new JTextArea(Constants.HOME_INFO);
+        pageInfo.setBounds(Constants.CENTER_X, Constants.HOME_INFO_START_LINE, Constants.CENTER_WIDTH, Constants.HOME_INFO_HEIGHT);
+        pageInfo.setBackground(Constants.BACKGROUND_COLOR);
+        card1.add(pageInfo);
+        
+        return card1;
+    }
+    
+    public JPanel createPropertiesPane() { 
+    	JPanel card1 = new JPanel();
+        
+    	JLabel header = new JLabel(Constants.PROPERTIES);
+        header.setFont(Constants.HEADER_FONT);
+        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
+        header.setHorizontalAlignment(JLabel.CENTER);
+        card1.add(header);
+        
+        return card1;
+    }
+    
+    public JPanel createApplicantsPane() {
+    	JPanel card1 = new JPanel();
+        
+    	JLabel header = new JLabel(Constants.APPLICANTS);
+        header.setFont(Constants.HEADER_FONT);
+        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
+        header.setHorizontalAlignment(JLabel.CENTER);
+        card1.add(header);
+        
+        return card1;
+    }
+    
+    public JPanel createRepairsPane() { 
+    	JPanel card1 = new JPanel();
+        
+    	JLabel header = new JLabel(Constants.HOME);
+        header.setFont(Constants.HEADER_FONT);
+        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
+        header.setHorizontalAlignment(JLabel.CENTER);
+        card1.add(header);
         
         card1.add(new JButton("Button 1"));
         card1.add(new JButton("Button 2"));
@@ -130,19 +142,4 @@ public class RealEstate {
         
         return card1;
     }
-    
-    public JPanel createSecondPane() { 
-    	JPanel card1 = new JPanel(); 
-        JLabel secondPane = new JLabel("Second Page");
-        secondPane.setFont(Constants.HEADER_FONT);
-        secondPane.setSize(Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
-        card1.add(secondPane);
-        
-        card1.add(new JButton("Button 1"));
-        card1.add(new JButton("Button 2"));
-        card1.add(new JButton("Button 3"));
-        
-        return card1;
-    }
-    
 }
