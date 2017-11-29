@@ -14,11 +14,16 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import connection.ConnectionSetup;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import javax.swing.JDialog;
+import utilities.ApplicantHibernateDao;
 import utilities.Constants;
  
 
 public class RealEstate {
- 
+    public static JFrame frame; 
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
         
@@ -37,7 +42,7 @@ public class RealEstate {
      */
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Real Estate");
+        frame = new JFrame("Real Estate");
         frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
@@ -52,7 +57,7 @@ public class RealEstate {
  
     public static void main(String[] args) {
         try {
-        	ConnectionSetup.connect();
+            //ConnectionSetup.connect();
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
@@ -77,7 +82,8 @@ public class RealEstate {
         });
     }
     
-    public JPanel createHomePane() { 
+    public JPanel createHomePane() {
+        ApplicantHibernateDao dao = new ApplicantHibernateDao();
     	@SuppressWarnings("serial")
 		JPanel card1 = new JPanel() {
             //Create the JPanels correct size. This can be done once. 
@@ -104,6 +110,24 @@ public class RealEstate {
         pageInfo.setBounds(Constants.CENTER_X, Constants.HOME_INFO_START_LINE, Constants.CENTER_WIDTH, Constants.HOME_INFO_HEIGHT);
         pageInfo.setBackground(Constants.BACKGROUND_COLOR);
         card1.add(pageInfo);
+        
+        JButton showData = new JButton("Push Button");
+        showData.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //display/center the jdialog when the button is pressed
+                    ApplicantHibernateDao dao = new ApplicantHibernateDao();
+                    String retrieval = dao.getAllApplications();
+                    
+                    JDialog d = new JDialog(frame, retrieval, true);
+                    d.setBounds(400, 400, 50, 100);
+                    d.setVisible(true);
+                    
+                    System.out.println("Working");
+                }
+        });
+        showData.setBounds(200, 200, 100, 100);
+        card1.add(showData);
         
         return card1;
     }
