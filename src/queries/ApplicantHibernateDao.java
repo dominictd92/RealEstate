@@ -32,7 +32,7 @@ public class ApplicantHibernateDao {
             + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String FILTER_APPLICANTS = "";
     
-    public String getAllApplications() {
+    public List<ApplicantEntity> getAllApplications() {
         try { 
             Class.forName(DATABASE_CONSTANTS.DRIVER);
             Connection conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
@@ -57,11 +57,11 @@ public class ApplicantHibernateDao {
             }
             
             conn.close();
-            return "Retrieved with " + applicants.size() + " values.";
+            return applicants;
         } catch (ClassNotFoundException | SQLException e) { 
             System.out.println("Error caught...");
             System.out.println(e.getMessage());
-            return "Error";
+            return null;
         } 
     } 
 }

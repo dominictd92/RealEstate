@@ -1,5 +1,6 @@
 package realEstateHome;
  
+import entities.ApplicantEntity;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -15,6 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JDialog;
 import queries.ApplicantHibernateDao;
 import utilities.APP_CONSTANTS;
@@ -139,14 +141,11 @@ public class RealEstate {
                 public void actionPerformed(ActionEvent e) {
                     //display/center the jdialog when the button is pressed
                     ApplicantHibernateDao dao = new ApplicantHibernateDao();
-                    String retrieval = dao.getAllApplications();
+                    List<ApplicantEntity> retrieval = dao.getAllApplications();
                     
-                    JDialog d = new JDialog(frame, retrieval, true);
-                    
+                    JDialog d = new JDialog(frame, "Applicants", true);
                     d.setBounds(400, 400, 50, 100);
                     d.setVisible(true);
-                    
-                    System.out.println("Working");
                 }
         });
         showData.setBounds(200, 200, 100, 100);
