@@ -5,7 +5,7 @@ import java.awt.Font;
 
 import javax.swing.UIManager;
 
-public class Constants {
+public class APP_CONSTANTS {
 	public final static int WINDOW_HEIGHT = 600;
 	public final static int WINDOW_WIDTH = 800;
 	public final static Color BACKGROUND_COLOR = UIManager.getColor("Panel.background");

@@ -13,13 +13,11 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import connection.ConnectionSetup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import javax.swing.JDialog;
-import utilities.ApplicantHibernateDao;
-import utilities.Constants;
+import queries.ApplicantHibernateDao;
+import utilities.APP_CONSTANTS;
  
 
 public class RealEstate {
@@ -43,18 +41,18 @@ public class RealEstate {
     private static void createAndShowGUI() {
         //Create and set up the window.
         frame = new JFrame("Real Estate");
-        frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        frame.setSize(APP_CONSTANTS.WINDOW_WIDTH, APP_CONSTANTS.WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
+
         //Create and set up the content pane.
         RealEstate realEstate = new RealEstate();
         realEstate.addComponentsToPane(frame.getContentPane());
- 
+
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
- 
+
     public static void main(String[] args) {
         try {
             //ConnectionSetup.connect();
@@ -88,28 +86,52 @@ public class RealEstate {
 		JPanel card1 = new JPanel() {
             //Create the JPanels correct size. This can be done once. 
             public Dimension getPreferredSize() {
-            	Dimension size = new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+            	Dimension size = new Dimension(APP_CONSTANTS.WINDOW_WIDTH, APP_CONSTANTS.WINDOW_HEIGHT);
             	return size;
             }
         };
         //clear the layout as it automatically sets the layout. 
         card1.setLayout(null);
         
-        JLabel header = new JLabel(Constants.HOME);
-        header.setFont(Constants.HEADER_FONT);
-        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
+        JLabel header = new JLabel(APP_CONSTANTS.HOME);
+        header.setFont(APP_CONSTANTS.HEADER_FONT);
+        header.setBounds(APP_CONSTANTS.HEADER_X, APP_CONSTANTS.HEADER_Y, APP_CONSTANTS.PAGE_TITLE_WIDTH, APP_CONSTANTS.PAGE_TITLE_HEIGHT);
         header.setHorizontalAlignment(JLabel.CENTER);
         card1.add(header);
         
-        JLabel devs = new JLabel(Constants.DEVELOPERS);
-        devs.setBounds(Constants.HEADER_X, Constants.PAGE_TITLE_HEIGHT, Constants.PAGE_TITLE_WIDTH, Constants.DEVELOPERS_HEIGHT);
+        JLabel devs = new JLabel(APP_CONSTANTS.DEVELOPERS);
+        devs.setBounds(APP_CONSTANTS.HEADER_X, APP_CONSTANTS.PAGE_TITLE_HEIGHT, APP_CONSTANTS.PAGE_TITLE_WIDTH, APP_CONSTANTS.DEVELOPERS_HEIGHT);
         devs.setHorizontalAlignment(JLabel.CENTER);
         card1.add(devs);
         
-        JTextArea pageInfo = new JTextArea(Constants.HOME_INFO);
-        pageInfo.setBounds(Constants.CENTER_X, Constants.HOME_INFO_START_LINE, Constants.CENTER_WIDTH, Constants.HOME_INFO_HEIGHT);
-        pageInfo.setBackground(Constants.BACKGROUND_COLOR);
+        JTextArea pageInfo = new JTextArea(APP_CONSTANTS.HOME_INFO);
+        pageInfo.setBounds(APP_CONSTANTS.CENTER_X, APP_CONSTANTS.HOME_INFO_START_LINE, APP_CONSTANTS.CENTER_WIDTH, APP_CONSTANTS.HOME_INFO_HEIGHT);
+        pageInfo.setBackground(APP_CONSTANTS.BACKGROUND_COLOR);
         card1.add(pageInfo);
+        
+        return card1;
+    }
+    
+    public JPanel createPropertiesPane() { 
+    	JPanel card1 = new JPanel();
+        
+    	JLabel header = new JLabel(APP_CONSTANTS.PROPERTIES);
+        header.setFont(APP_CONSTANTS.HEADER_FONT);
+        header.setBounds(APP_CONSTANTS.HEADER_X, APP_CONSTANTS.HEADER_Y, APP_CONSTANTS.PAGE_TITLE_WIDTH, APP_CONSTANTS.PAGE_TITLE_HEIGHT);
+        header.setHorizontalAlignment(JLabel.CENTER);
+        card1.add(header);
+        
+        return card1;
+    }
+    
+    public JPanel createApplicantsPane() {
+    	JPanel card1 = new JPanel();
+        
+    	JLabel header = new JLabel(APP_CONSTANTS.APPLICANTS);
+        header.setFont(APP_CONSTANTS.HEADER_FONT);
+        header.setBounds(APP_CONSTANTS.HEADER_X, APP_CONSTANTS.HEADER_Y, APP_CONSTANTS.PAGE_TITLE_WIDTH, APP_CONSTANTS.PAGE_TITLE_HEIGHT);
+        header.setHorizontalAlignment(JLabel.CENTER);
+        card1.add(header);
         
         JButton showData = new JButton("Push Button");
         showData.addActionListener(new ActionListener() {
@@ -120,6 +142,7 @@ public class RealEstate {
                     String retrieval = dao.getAllApplications();
                     
                     JDialog d = new JDialog(frame, retrieval, true);
+                    
                     d.setBounds(400, 400, 50, 100);
                     d.setVisible(true);
                     
@@ -132,36 +155,12 @@ public class RealEstate {
         return card1;
     }
     
-    public JPanel createPropertiesPane() { 
-    	JPanel card1 = new JPanel();
-        
-    	JLabel header = new JLabel(Constants.PROPERTIES);
-        header.setFont(Constants.HEADER_FONT);
-        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
-        header.setHorizontalAlignment(JLabel.CENTER);
-        card1.add(header);
-        
-        return card1;
-    }
-    
-    public JPanel createApplicantsPane() {
-    	JPanel card1 = new JPanel();
-        
-    	JLabel header = new JLabel(Constants.APPLICANTS);
-        header.setFont(Constants.HEADER_FONT);
-        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
-        header.setHorizontalAlignment(JLabel.CENTER);
-        card1.add(header);
-        
-        return card1;
-    }
-    
     public JPanel createRepairsPane() { 
     	JPanel card1 = new JPanel();
         
-    	JLabel header = new JLabel(Constants.HOME);
-        header.setFont(Constants.HEADER_FONT);
-        header.setBounds(Constants.HEADER_X, Constants.HEADER_Y, Constants.PAGE_TITLE_WIDTH, Constants.PAGE_TITLE_HEIGHT);
+    	JLabel header = new JLabel(APP_CONSTANTS.HOME);
+        header.setFont(APP_CONSTANTS.HEADER_FONT);
+        header.setBounds(APP_CONSTANTS.HEADER_X, APP_CONSTANTS.HEADER_Y, APP_CONSTANTS.PAGE_TITLE_WIDTH, APP_CONSTANTS.PAGE_TITLE_HEIGHT);
         header.setHorizontalAlignment(JLabel.CENTER);
         card1.add(header);
         
