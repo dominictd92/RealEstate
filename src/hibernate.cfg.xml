@@ -22,8 +22,8 @@
         <mapping class="entities.SellerEntity"/>
         <mapping class="entities.SellerSellsPropertyEntity"/>
         <mapping class="entities.TennantEntity"/>
-        <!-- <property name="connection.username"/> -->
-        <!-- <property name="connection.password"/> -->
+        <property name="connection.username">ddange1</property>
+        <property name="connection.password">Cosc*8re5</property>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

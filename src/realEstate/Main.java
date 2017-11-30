@@ -17,13 +17,36 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.persistence.metamodel.EntityType;
 import javax.swing.JDialog;
+import org.hibernate.HibernateException;
+import org.hibernate.Metamodel;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import queries.ApplicantHibernateDao;
 import utilities.APP_CONSTANTS;
  
 
 public class Main {
     public static JFrame frame; 
+    private static final SessionFactory ourSessionFactory;
+    
+     static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+
+            ourSessionFactory = configuration.buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+     }
+     
+    public static Session getSession() throws HibernateException {
+        return ourSessionFactory.openSession();
+    }
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
         
@@ -57,9 +80,19 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        final Session session = getSession();
         try {
-            //ConnectionSetup.connect();
+            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
+            for (EntityType<?> entityType : metamodel.getEntities()) {
+                final String entityName = entityType.getName();
+                final Query query = session.createQuery("from " + entityName);
+                System.out.println("executing: " + query.getQueryString());
+                for (Object o : query.list()) {
+                    System.out.println("  " + o);
+                }
+            }
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {
@@ -69,8 +102,10 @@ public class Main {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (Exception e) {
-			e.printStackTrace();
-		}
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
         /* Turn off metal's use of bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
          
