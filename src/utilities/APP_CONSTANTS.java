@@ -11,8 +11,8 @@ public class APP_CONSTANTS {
 	public final static Color BACKGROUND_COLOR = UIManager.getColor("Panel.background");
 	
 	//Objects
-	public final static int BUTTON_WIDTH = 100;
-	public final static int BUTTON_HEIGHT = 50;
+	public final static int BUTTON_WIDTH = 175;
+	public final static int BUTTON_HEIGHT = 25;
 	
 	//Headers
 	public final static int HEADER_X = 0;
@@ -36,7 +36,12 @@ public class APP_CONSTANTS {
 	
 	//Applicants Constants
 	public final static String APPLICANTS = "Applicants";
-	
+        public final static int APPLICANTS_BUTTON_X = WINDOW_WIDTH/2 - BUTTON_WIDTH/2;
+        
+        public final static int CREATE_BUTTON_Y = PAGE_TITLE_HEIGHT + 10;
+        public final static int VIEW_BUTTON_Y = PAGE_TITLE_HEIGHT + 45;
+        public final static int FILTER_BUTTON_Y = PAGE_TITLE_HEIGHT + 80;
+                
 	//Properties Constants
 	public final static String PROPERTIES = "Properties";
 	

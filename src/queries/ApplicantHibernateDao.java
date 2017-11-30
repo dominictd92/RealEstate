@@ -64,4 +64,34 @@ public class ApplicantHibernateDao {
             return null;
         } 
     } 
+    
+    public boolean insertApplicant(ApplicantEntity app) { 
+        try { 
+            Class.forName(DATABASE_CONSTANTS.DRIVER);
+            Connection conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
+            int i = 1;
+            PreparedStatement stmt = conn.prepareStatement(CREATE_APPLICANT);
+            
+            stmt.setInt(i++, app.getSsn());
+            stmt.setString(i++, app.getfName());
+            stmt.setString(i++, app.getlName());
+            stmt.setString(i++, app.getmName());
+            stmt.setString(i++, app.getCreditScore());
+            stmt.setString(i++, app.getAddress());
+            stmt.setString(i++, app.getMoveDate());
+            stmt.setString(i++, app.getPhoneNumber());
+            stmt.setString(i++, app.getEmployer());
+            stmt.setString(i++, app.getJobTitle());
+            stmt.setString(i++, app.getSalary());
+            stmt.executeUpdate();
+            
+            conn.close();
+            return true;
+        } catch (ClassNotFoundException | SQLException e) { 
+            System.out.println("Error caught...");
+            System.out.println(e.getMessage());
+            return false;
+        } 
+    }
+    
 }
