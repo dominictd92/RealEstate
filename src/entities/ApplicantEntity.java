@@ -164,4 +164,21 @@ public class ApplicantEntity {
         result = 31 * result + (fName != null ? fName.hashCode() : 0);
         return result;
     }
+    
+    public Object[] getColumnArray() {
+        String[] columns = new String[] {
+            "SSN", "First Name", "Middle Name", "Last Name", "Address", "Phone Number",
+            "Move Date", "Credit Score", "Employer", "Job Title", "Salary"
+        };
+        return columns; 
+    }
+    
+    public Object[] getApplicantArray() { 
+        Object[] rows = new Object[] {
+            this.ssn, this.fName, this.mName, this.lName,
+            this.address, this.phoneNumber, this.moveDate, this.creditScore,
+            this.employer, this.jobTitle, this.salary
+        };
+        return rows;
+    }
 }

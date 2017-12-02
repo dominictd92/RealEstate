@@ -24,6 +24,8 @@ public class APP_CONSTANTS {
 	//Center the data under the header
 	public final static int CENTER_X = 100; 
 	public final static int CENTER_WIDTH = WINDOW_WIDTH - (CENTER_X * 2);
+        public final static int CENTER_Y = 100;
+        public final static int CENTER_HEIGHT = WINDOW_HEIGHT - (CENTER_Y * 2);
 	
 	//Home Constants
 	public final static String HOME = "SHD Real Estate Investments";
@@ -41,9 +43,7 @@ public class APP_CONSTANTS {
         public final static int CREATE_BUTTON_Y = PAGE_TITLE_HEIGHT + 10;
         public final static int VIEW_BUTTON_Y = PAGE_TITLE_HEIGHT + 45;
         public final static int FILTER_BUTTON_Y = PAGE_TITLE_HEIGHT + 80;
-                
+        
 	//Properties Constants
 	public final static String PROPERTIES = "Properties";
-	
-	
 }

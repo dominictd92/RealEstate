@@ -3,3 +3,12 @@ bin/realEstateHome/RealEstate$1.class
 bin/realEstateHome/RealEstate$2.class
 bin/realEstateHome/RealEstate.class
 bin/utilities/Constants.class
+/build/
+/dist/
+nbproject/project.xml
+nbproject/project.properties
+nbproject/private/private.properties
+nbproject/genfiles.properties
+nbproject/build-impl.xml
+manifest.mf
+nbproject/private/private.xml

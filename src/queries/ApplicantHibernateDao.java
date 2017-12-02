@@ -4,6 +4,7 @@ import entities.ApplicantEntity;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.util.StringUtils;
 import utilities.DATABASE_CONSTANTS;
 
 /**
@@ -12,11 +13,12 @@ import utilities.DATABASE_CONSTANTS;
  * @author ddangerfield
  */
 public class ApplicantHibernateDao {
-    //constants for the objects so that names aren't mixed up 
+    //constants for the objects so that database names aren't mixed up
+    //if one is changed, change the constant and it's changed for all of the queries
     private static final String SSN = "ssn";
-    private static final String FNAME = "fName";
-    private static final String LNAME = "lName";
-    private static final String MNAME = "mName";
+    private static final String FNAME = "f_Name";
+    private static final String LNAME = "l_Name";
+    private static final String MNAME = "m_Name";
     private static final String CREDIT_SCORE = "creditScore";
     private static final String ADDRESS = "address";
     private static final String MOVE_DATE = "moveDate";
@@ -27,15 +29,26 @@ public class ApplicantHibernateDao {
     
     //Put all of the queries above so the document is readable
     public static final String SELECT_APPLICANTS = "SELECT * FROM Applicant;";
-    public static final String CREATE_APPLICANT = "INSERT INTO Applicant(ssn, fName, lName,"
-            + " mName, creditScore, address, moveDate, phoneNumber, employer, jobTitle, salary)"
-            + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    public static final String FILTER_APPLICANTS = "";
+    public static final String CREATE_APPLICANT = "INSERT INTO Applicant(" + SSN + ", " + FNAME + ", " + LNAME
+        + ", " + MNAME + ", " + CREDIT_SCORE + ", " + ADDRESS + ", " + MOVE_DATE + ", " + PHONE_NUMBER 
+        + ", " + EMPLOYER + ", " + JOB_TITLE + ", " + SALARY + ")"
+        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String DELETE_APPLICANT = "DELETE FROM Applicant WHERE " + SSN + " = ?";
+    public static final String FILTER_APPLICANTS = "SELECT * FROM Applicant"
+        + " WHERE ( -1 = ? OR " + SSN + " = ? ) "
+        + " AND " + FNAME + " LIKE ? AND " + LNAME + " LIKE ? AND " + MNAME + " LIKE ? "
+        + " AND " + CREDIT_SCORE + " LIKE ? AND " + ADDRESS + " LIKE ? AND " + MOVE_DATE + " LIKE ? "
+        + " AND " + PHONE_NUMBER + " LIKE ? AND " + EMPLOYER + " LIKE ? AND " + JOB_TITLE + " LIKE ? AND " + SALARY + " LIKE ?";
+    public static final String APPLICANT_FOR_PROPERTY = 
+        " SELECT * FROM Applicant a"
+        + " INNER JOIN Applicant_Applies_For_Property ap ON ap.Applicant_ssn = a.ssn"
+        + " INNER JOIN Property o ON p.propertID = ap.propertyID "; 
     
     public List<ApplicantEntity> getAllApplications() {
+        Connection conn;
         try { 
             Class.forName(DATABASE_CONSTANTS.DRIVER);
-            Connection conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
+            conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
             
             Statement stmt = conn.createStatement();
             List<ApplicantEntity> applicants = new ArrayList<>();
@@ -63,12 +76,13 @@ public class ApplicantHibernateDao {
             System.out.println(e.getMessage());
             return null;
         } 
-    } 
+    }
     
-    public boolean insertApplicant(ApplicantEntity app) { 
+    public boolean insertApplicant(ApplicantEntity app) {
+        Connection conn;
         try { 
             Class.forName(DATABASE_CONSTANTS.DRIVER);
-            Connection conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
+            conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
             int i = 1;
             PreparedStatement stmt = conn.prepareStatement(CREATE_APPLICANT);
             
@@ -94,4 +108,51 @@ public class ApplicantHibernateDao {
         } 
     }
     
+    public List<ApplicantEntity> getFilteredApplications(ApplicantEntity app) {
+        List<ApplicantEntity> applicants = new ArrayList<>();
+        Connection conn;
+        try {
+            Class.forName(DATABASE_CONSTANTS.DRIVER);
+            conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
+            int i = 1;
+            PreparedStatement stmt = conn.prepareStatement(FILTER_APPLICANTS);
+            
+            stmt.setInt(i++, app.getSsn());
+            stmt.setInt(i++, app.getSsn());
+            stmt.setString(i++, StringUtils.isEmpty(app.getfName()) ? "%" : "%" + app.getfName()+ "%" );
+            stmt.setString(i++, StringUtils.isEmpty(app.getlName()) ? "%" : "%" + app.getlName() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getmName()) ? "%" : "%" + app.getmName() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getCreditScore()) ? "%" : "%" + app.getCreditScore() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getAddress()) ? "%" : "%" + app.getAddress() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getMoveDate()) ? "%" : "%" + app.getMoveDate() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getPhoneNumber()) ? "%" : "%" + app.getPhoneNumber() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getEmployer()) ? "%" : "%" + app.getEmployer() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getJobTitle()) ? "%" : "%" + app.getJobTitle() + "%");
+            stmt.setString(i++, StringUtils.isEmpty(app.getSalary()) ? "%" : "%" + app.getSalary() + "%");
+            ResultSet results = stmt.executeQuery();
+            
+            while(results.next()) { 
+                ApplicantEntity applicant = new ApplicantEntity();
+                applicant.setSsn(results.getInt(SSN));
+                applicant.setlName(results.getString(LNAME));
+                applicant.setfName(results.getString(FNAME));
+                applicant.setmName(results.getString(MNAME));
+                applicant.setCreditScore(results.getString(CREDIT_SCORE));
+                applicant.setAddress(results.getString(ADDRESS));
+                applicant.setMoveDate(results.getString(MOVE_DATE));
+                applicant.setPhoneNumber(results.getString(PHONE_NUMBER));
+                applicant.setEmployer(results.getString(EMPLOYER));
+                applicant.setJobTitle(results.getString(JOB_TITLE));
+                applicant.setSalary(results.getString(SALARY));
+                applicants.add(applicant);
+            }
+            
+            conn.close();
+            return applicants;
+        } catch (ClassNotFoundException | SQLException e) { 
+            System.out.println("Error caught...");
+            System.out.println(e.getMessage());
+            return applicants;
+        } 
+    } 
 }

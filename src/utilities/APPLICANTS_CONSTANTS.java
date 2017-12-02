@@ -10,7 +10,7 @@ public class APPLICANTS_CONSTANTS {
     
     public static final int TEXT_AREA_WIDTH = 100;
     public static final int TEXT_AREA_HEIGHT = 25;
-    
+    //Creation Page
     //ROW 1
     public static final int FNAME_LABEL_POSITION_X = 25;
     public static final int FNAME_LABEL_POSITION_Y = 50;
@@ -72,4 +72,6 @@ public class APPLICANTS_CONSTANTS {
     
     public static final int SUBMIT_POSITION_X = 25;
     public static final int SUBMIT_POSITION_Y = 400;
+    
+    //Delete Page
 }

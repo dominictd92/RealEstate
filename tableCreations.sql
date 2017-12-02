@@ -10,6 +10,7 @@ CREATE TABLE Employee (
 GO
 CREATE TABLE Applicant (
     ssn INT NOT NULL, 
+    f_name VARCHAR(45),
     l_name VARCHAR(45),
     m_name VARCHAR(45),
     creditScore VARCHAR(45),
@@ -18,8 +19,7 @@ CREATE TABLE Applicant (
     phoneNumber VARCHAR(45),
     employer VARCHAR(45),
     jobTitle VARCHAR(45),
-    salary VARCHAR(45),
-    employer VARCHAR(45), 
+    salary VARCHAR(45), 
     PRIMARY KEY (ssn)
 )
 GO
@@ -86,8 +86,8 @@ CREATE TABLE Property (
     deckOrPatio VARCHAR(3),
     washer VARCHAR(3),
     dryer VARCHAR(3),
-    offStreetParking, 
-    numberOfBaths INT
+    offStreetParking INT, 
+    numberOfBaths INT,
     buildingType VARCHAR(45),
     phoneNumber VARCHAR(45),
     basement VARCHAR(45),
@@ -159,7 +159,7 @@ CREATE TABLE Property_has_Amenity (
     FOREIGN KEY (Property_Tennant_ssn) REFERENCES Tennant(ssn)
 )
 GO
-CREATE TABLE Dependent_Lives_with_Tennant(
+CREATE TABLE Dependent_Lives_with_Tennant (
     Dependent_depId INT,
     Tennant_ssn INT,
     FOREIGN KEY (Dependent_depId) REFERENCES Dependent(depId),
