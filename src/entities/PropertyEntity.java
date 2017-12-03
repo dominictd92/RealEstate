@@ -6,72 +6,95 @@ import javax.persistence.*;
 @Table(name = "Property", schema = "RealEstate", catalog = "")
 @IdClass(PropertyEntityPK.class)
 public class PropertyEntity {
-    private int propertyId;
-    private String deckOrPatio;
-    private String washer;
-    private String dryer;
-    private String offStreetParking;
+    private Integer propertyID;
+    private Integer deckOrPatio;
+    private Integer washer;
+    private Integer dryer;
+    private Integer offStreetParking;
     private Integer numberOfBaths;
     private String buildingType;
     private String phoneNumber;
-    private String basement;
+    private Integer basement;
     private String parkingType;
-    private String numOfRooms;
+    private Integer numOfRooms;
     private Integer zipCode;
     private String streetAddress;
     private String city;
     private String state;
     private Integer numOfTennants;
-    private int tennantSsn;
+    private Integer tennantSsn;
     private ProperttyNeedsRepairEntity properttyNeedsRepair;
-
+    
+    public PropertyEntity (Integer propertyID, String streetAddress, String city, String state, Integer zipCode, 
+            String phoneNumber, Integer numOfRooms, Integer numberOfBaths, Integer tennant_ssn, Integer numOfTennants, 
+            Integer washer, Integer dryer, Integer deckOrPatio, Integer basement) {
+        this.propertyID = propertyID;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.phoneNumber = phoneNumber;
+        this.numOfRooms = numOfRooms;
+        this.numberOfBaths = numberOfBaths;
+        this.washer = washer;
+        this.dryer = dryer;
+        this.deckOrPatio = deckOrPatio;
+        this.basement = basement;
+        this.tennantSsn = tennant_ssn;
+        this.numOfTennants = numOfTennants;
+    }
+    
+    public PropertyEntity() { 
+        //null
+    }
+    
     @Id
     @Column(name = "propertyID")
-    public int getPropertyId() {
-        return propertyId;
+    public Integer getPropertyID() {
+        return propertyID;
     }
 
-    public void setPropertyId(int propertyId) {
-        this.propertyId = propertyId;
+    public void setPropertyID(Integer propertyID) {
+        this.propertyID = propertyID;
     }
 
     @Basic
     @Column(name = "deckOrPatio")
-    public String getDeckOrPatio() {
+    public Integer getDeckOrPatio() {
         return deckOrPatio;
     }
 
-    public void setDeckOrPatio(String deckOrPatio) {
+    public void setDeckOrPatio(Integer deckOrPatio) {
         this.deckOrPatio = deckOrPatio;
     }
 
     @Basic
     @Column(name = "washer")
-    public String getWasher() {
+    public Integer getWasher() {
         return washer;
     }
 
-    public void setWasher(String washer) {
+    public void setWasher(Integer washer) {
         this.washer = washer;
     }
 
     @Basic
     @Column(name = "dryer")
-    public String getDryer() {
+    public Integer getDryer() {
         return dryer;
     }
 
-    public void setDryer(String dryer) {
+    public void setDryer(Integer dryer) {
         this.dryer = dryer;
     }
 
     @Basic
     @Column(name = "offStreetParking")
-    public String getOffStreetParking() {
+    public Integer getOffStreetParking() {
         return offStreetParking;
     }
 
-    public void setOffStreetParking(String offStreetParking) {
+    public void setOffStreetParking(Integer offStreetParking) {
         this.offStreetParking = offStreetParking;
     }
 
@@ -107,11 +130,11 @@ public class PropertyEntity {
 
     @Basic
     @Column(name = "basement")
-    public String getBasement() {
+    public Integer getBasement() {
         return basement;
     }
 
-    public void setBasement(String basement) {
+    public void setBasement(Integer basement) {
         this.basement = basement;
     }
 
@@ -127,11 +150,11 @@ public class PropertyEntity {
 
     @Basic
     @Column(name = "numOfRooms")
-    public String getNumOfRooms() {
+    public Integer getNumOfRooms() {
         return numOfRooms;
     }
 
-    public void setNumOfRooms(String numOfRooms) {
+    public void setNumOfRooms(Integer numOfRooms) {
         this.numOfRooms = numOfRooms;
     }
 
@@ -187,11 +210,11 @@ public class PropertyEntity {
 
     @Id
     @Column(name = "Tennant_ssn")
-    public int getTennantSsn() {
+    public Integer getTennantSsn() {
         return tennantSsn;
     }
 
-    public void setTennantSsn(int tennantSsn) {
+    public void setTennantSsn(Integer tennantSsn) {
         this.tennantSsn = tennantSsn;
     }
 
@@ -202,7 +225,7 @@ public class PropertyEntity {
 
         PropertyEntity that = (PropertyEntity) o;
 
-        if (propertyId != that.propertyId) return false;
+        if (propertyID != that.propertyID) return false;
         if (tennantSsn != that.tennantSsn) return false;
         if (deckOrPatio != null ? !deckOrPatio.equals(that.deckOrPatio) : that.deckOrPatio != null) return false;
         if (washer != null ? !washer.equals(that.washer) : that.washer != null) return false;
@@ -229,7 +252,7 @@ public class PropertyEntity {
 
     @Override
     public int hashCode() {
-        int result = propertyId;
+        int result = propertyID.intValue();
         result = 31 * result + (deckOrPatio != null ? deckOrPatio.hashCode() : 0);
         result = 31 * result + (washer != null ? washer.hashCode() : 0);
         result = 31 * result + (dryer != null ? dryer.hashCode() : 0);

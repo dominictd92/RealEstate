@@ -1,64 +1,56 @@
 package realEstate;
  
-import entities.ApplicantEntity;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-import javax.persistence.metamodel.EntityType;
-import javax.swing.JDialog;
 import org.hibernate.HibernateException;
-import org.hibernate.Metamodel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import queries.ApplicantHibernateDao;
+import realEstate.property.Property2;
+
 import utilities.APP_CONSTANTS;
- 
 
 public class Main {
     public static JFrame frame; 
-    private static final SessionFactory ourSessionFactory;
+    //private static final SessionFactory ourSessionFactory;
     
-     static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            ourSessionFactory = configuration.buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-     }
+//    static {
+//        try {
+//            Configuration configuration = new Configuration();
+//            configuration.configure();
+//
+//            ourSessionFactory = configuration.buildSessionFactory();
+//        } catch (Throwable ex) {
+//            throw new ExceptionInInitializerError(ex);
+//        }
+//     }
      
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
+//    public static Session getSession() throws HibernateException {
+//        return ourSessionFactory.openSession();
+//    }
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
-        
+        Property2 properties = new Property2();
         //create all of the pages in the form or tabs
         tabbedPane.addTab("Home", Home.createHomePane());
-        tabbedPane.addTab("Properties", Properties.createPropertiesPane());
+        tabbedPane.addTab("Properties", properties.returnJPanel());
         tabbedPane.addTab("Applicants", Applicants.createApplicantsPane());
         tabbedPane.addTab("Repairs", createRepairsPane());
         
         pane.add(tabbedPane, BorderLayout.CENTER);
     }
- 
+
     /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
@@ -80,17 +72,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        final Session session = getSession();
+        //final Session session = getSession();
         try {
-            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-            for (EntityType<?> entityType : metamodel.getEntities()) {
-                final String entityName = entityType.getName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
+//            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
+//            for (EntityType<?> entityType : metamodel.getEntities()) {
+//                final String entityName = entityType.getName();
+//                final Query query = session.createQuery("from " + entityName);
+//                System.out.println("executing: " + query.getQueryString());
+//                for (Object o : query.list()) {
+//                    System.out.println("  " + o);
+//                }
+//            }
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         
         } catch (UnsupportedLookAndFeelException ex) {
@@ -104,7 +96,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
         /* Turn off metal's use of bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);

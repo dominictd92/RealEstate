@@ -15,6 +15,7 @@ public class Home {
     	@SuppressWarnings("serial")
 		JPanel card1 = new JPanel() {
             //Create the JPanels correct size. This can be done once. 
+            @Override
             public Dimension getPreferredSize() {
             	Dimension size = new Dimension(APP_CONSTANTS.WINDOW_WIDTH, APP_CONSTANTS.WINDOW_HEIGHT);
             	return size;

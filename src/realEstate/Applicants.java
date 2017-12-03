@@ -1,6 +1,7 @@
 package realEstate;
 
 import entities.ApplicantEntity;
+import entities.PropertyEntity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -287,5 +288,10 @@ public class Applicants {
         salaryField.setBounds(APPLICANTS_CONSTANTS.SALARY_TEXT_POSITION_X, APPLICANTS_CONSTANTS.SALARY_TEXT_POSITION_Y, 
             APPLICANTS_CONSTANTS.TEXT_AREA_WIDTH, APPLICANTS_CONSTANTS.TEXT_AREA_HEIGHT);
         d.add(salaryField);
+    }
+    
+    public static List<PropertyEntity> getPropertiesToApplyFor() { 
+        
+        return null;
     }
 }

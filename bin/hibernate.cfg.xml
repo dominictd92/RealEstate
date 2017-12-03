@@ -4,8 +4,10 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/RealEstate</property>
+        <property name="connection.url">jdbc:mysql://triton.towson.edu-mysql:3360/ddange1db</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">ddange1</property>
+ +        <property name="connection.password">Cosc*8re5</property>
         <mapping class="entities.AmenityEntity"/>
         <mapping class="entities.ApplicantEntity"/>
         <mapping class="entities.ApplicantAppliesForPropertyEntity"/>
@@ -22,9 +24,7 @@
         <mapping class="entities.SellerEntity"/>
         <mapping class="entities.SellerSellsPropertyEntity"/>
         <mapping class="entities.TennantEntity"/>
-        <!-- <property name="connection.username"/> -->
-        <!-- <property name="connection.password"/> -->
-
+        
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>
