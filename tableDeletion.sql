@@ -15,13 +15,3 @@ DROP TABLE Tennant;
 DROP TABLE Dependent;
 DROP TABLE Seller;
 DROP TABLE Repair;
-
-
-
-
-
-
-
-
-
-
