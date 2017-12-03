@@ -43,6 +43,7 @@ public class APP_CONSTANTS {
         public final static int CREATE_BUTTON_Y = PAGE_TITLE_HEIGHT + 10;
         public final static int VIEW_BUTTON_Y = PAGE_TITLE_HEIGHT + 45;
         public final static int FILTER_BUTTON_Y = PAGE_TITLE_HEIGHT + 80;
+        public final static int UPDATE_BUTTON_Y = PAGE_TITLE_HEIGHT + 115;
         
 	//Properties Constants
 	public final static String PROPERTIES = "Properties";

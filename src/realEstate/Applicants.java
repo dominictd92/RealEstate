@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import org.springframework.util.StringUtils;
 import queries.ApplicantHibernateDao;
+import queries.PropertiesHibernateDao;
 import static realEstate.Main.frame;
 import utilities.APPLICANTS_CONSTANTS;
 import utilities.APP_CONSTANTS;
@@ -26,7 +28,10 @@ public class Applicants {
     static JTextField fNameField, mNameField, lNameField, ssnField, addressField, creditField, moveField,
         phoneField, employerField, jobField, salaryField;
     static JLabel fNameLabel, mNameLabel, lNameLabel, ssnLabel, addressLabel, creditLabel, moveLabel,
-        phoneLabel, employerLabel, jobLabel, salaryLabel; 
+        phoneLabel, employerLabel, jobLabel, salaryLabel, statusLabel, propertyLabel; 
+    static JComboBox statusList, propertyList;
+    public static Integer applicantSsn;
+    public static Integer propertyId;
     
     public static JPanel createApplicantsPane() {
     	JPanel card1 = new JPanel();
@@ -41,14 +46,13 @@ public class Applicants {
         JButton createApplicants = new JButton("Create Applicants");
         createApplicants.setBounds(APP_CONSTANTS.APPLICANTS_BUTTON_X, APP_CONSTANTS.CREATE_BUTTON_Y, 
             APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
-        createApplicants.addActionListener((ActionEvent e) -> {
-            List<ApplicantEntity> retrieval = dao.getAllApplications();
-            
+        createApplicants.addActionListener((ActionEvent e) -> {            
             JDialog d = new JDialog(frame, "Create Applicants", true);
             d.setLayout(null);
             d.setSize(APP_CONSTANTS.WINDOW_WIDTH, APP_CONSTANTS.WINDOW_HEIGHT);
             
             getLabelsAndTextAreas(d);
+            getPropertyLabelsAndDropdown(d);
             
             //Submit buttons            
             JButton submit = new JButton("Submit");
@@ -57,24 +61,19 @@ public class Applicants {
             submit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    ApplicantEntity applicant = new ApplicantEntity();
-                    applicant.setfName(fNameField.getText());
-                    applicant.setmName(mNameField.getText());
-                    applicant.setlName(lNameField.getText());
-                    applicant.setSsn(Integer.parseInt(ssnField.getText()));
-                    applicant.setAddress(addressField.getText());
-                    applicant.setCreditScore(creditField.getText());
-                    applicant.setMoveDate(moveField.getText());
-                    applicant.setPhoneNumber(phoneField.getText());
-                    applicant.setEmployer(employerField.getText());
-                    applicant.setJobTitle(jobField.getText());
-                    applicant.setSalary(salaryField.getText());
+                    ApplicantEntity applicant = new ApplicantEntity(Integer.getInteger(ssnField.getText()), fNameField.getText(), 
+                            mNameField.getText(), lNameField.getText(), addressField.getText(), phoneField.getText(),
+                            creditField.getText(), moveField.getText(), employerField.getText(), 
+                            jobField.getText(), salaryField.getText());
+                    
+                    applicant.setApplicationStatus(statusList.getSelectedItem().toString());
+                    int propertyID = Integer.parseInt(propertyList.getSelectedItem().toString().trim());
                     
                     String result;
-                    if (dao.insertApplicant(applicant)) {
+                    if (dao.insertApplicant(applicant) && dao.insertApplicantPropertyRelationship(applicant, propertyID)) {
                         result = "Completed insert";
                     } else {
-                        result = "Error occured on import.";
+                        result = "Error occured on creation";
                     }
                     
                     d.dispose();
@@ -100,7 +99,6 @@ public class Applicants {
         viewApplicants.setBounds(APP_CONSTANTS.APPLICANTS_BUTTON_X, APP_CONSTANTS.VIEW_BUTTON_Y, 
             APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
         viewApplicants.addActionListener((ActionEvent e) -> {
-            //display/center the jdialog when the button is pressed
             JDialog d = new JDialog(frame, "View All Applicants", true);
             d.setBounds(0, 0, APP_CONSTANTS.WINDOW_WIDTH, APP_CONSTANTS.WINDOW_HEIGHT);
             d.setLayout(null);
@@ -131,25 +129,21 @@ public class Applicants {
             d.setSize(APP_CONSTANTS.WINDOW_WIDTH, APP_CONSTANTS.WINDOW_HEIGHT);
             
             getLabelsAndTextAreas(d);
+            getPropertyLabelsAndDropdown(d);
             
             //Submit buttons            
             JButton submit = new JButton("Submit");
             submit.setBounds(APPLICANTS_CONSTANTS.SUBMIT_POSITION_X, APPLICANTS_CONSTANTS.SUBMIT_POSITION_Y, 
                 APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
             submit.addActionListener((ActionEvent ae) -> {
-                ApplicantEntity applicant = new ApplicantEntity(); 
-                applicant.setfName(fNameField.getText());
-                applicant.setmName(mNameField.getText());
-                applicant.setlName(lNameField.getText());
-                applicant.setSsn(StringUtils.isEmpty(ssnField.getText()) ? -1 : Integer.valueOf(ssnField.getText()));
-                applicant.setAddress(addressField.getText());
-                applicant.setCreditScore(creditField.getText());
-                applicant.setMoveDate(moveField.getText());
-                applicant.setPhoneNumber(phoneField.getText());
-                applicant.setEmployer(employerField.getText());
-                applicant.setJobTitle(jobField.getText());
-                applicant.setSalary(salaryField.getText());
-                
+                ApplicantEntity applicant = new ApplicantEntity(Integer.getInteger(ssnField.getText()), fNameField.getText(), 
+                    mNameField.getText(), lNameField.getText(), addressField.getText(), phoneField.getText(),
+                    creditField.getText(), moveField.getText(), employerField.getText(), 
+                    jobField.getText(), salaryField.getText()); 
+                applicant.setApplicationStatus(statusList.getSelectedItem().toString());
+                applicant.setPropertyId(StringUtils.isEmpty(propertyList.getSelectedItem().toString()) ? 
+                    -1 : Integer.parseInt(propertyList.getSelectedItem().toString()));
+              
                 List<ApplicantEntity> results = dao.getFilteredApplications(applicant);
                 Object[][] objects = new Object[results.size() + 1][applicant.getColumnArray().length];
                 JDialog resultDialog = new JDialog(); 
@@ -174,6 +168,102 @@ public class Applicants {
             d.setVisible(true);
         });
         card1.add(filterApplicants);
+        
+        JButton updateApplicants = new JButton("Update Applicants");
+        updateApplicants.setBounds(APP_CONSTANTS.APPLICANTS_BUTTON_X, APP_CONSTANTS.UPDATE_BUTTON_Y, 
+            APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
+        updateApplicants.addActionListener((ActionEvent e) -> {
+            
+            JDialog selectApplicant = new JDialog(frame, "Select Applicant", true);
+            selectApplicant.setLayout(null);
+            selectApplicant.setSize(350, 150);
+            
+            JLabel applicantLabel = new JLabel("Applicant SSN:");
+            applicantLabel.setBounds(APPLICANTS_CONSTANTS.UPDATE_LABEL_X, APPLICANTS_CONSTANTS.UPDATE_LABEL_Y,
+                APPLICANTS_CONSTANTS.LABEL_SIZE_WIDTH, APPLICANTS_CONSTANTS.LABEL_SIZE_HEIGHT);
+            selectApplicant.add(applicantLabel);
+            
+            JComboBox applicantDropdown = new JComboBox();
+            applicantDropdown.setBounds(APPLICANTS_CONSTANTS.UPDATE_DROPDOWN_X, APPLICANTS_CONSTANTS.UPDATE_DROPDOWN_Y,
+                APPLICANTS_CONSTANTS.DROPDOWN_WIDTH, APPLICANTS_CONSTANTS.DROPDOWN_HEIGHT);
+            List<ApplicantEntity> applicants = dao.getAllApplications();
+            for (ApplicantEntity applicant : applicants) {
+                applicantDropdown.addItem(applicant.getSsn() + "; " + applicant.getPropertyId());
+            }
+            selectApplicant.add(applicantDropdown);
+            
+            //Submit buttons            
+            JButton submit = new JButton("Submit");
+            submit.setBounds(APPLICANTS_CONSTANTS.SUBMIT_POSITION_X, APPLICANTS_CONSTANTS.UPDATE_SUBMIT_Y, 
+                APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
+            submit.addActionListener((ActionEvent ae) -> {
+                JDialog d = new JDialog(frame, "Update Applicants", true);
+                d.setLayout(null);
+                d.setSize(APP_CONSTANTS.WINDOW_WIDTH, APP_CONSTANTS.WINDOW_HEIGHT);
+                
+                String select = applicantDropdown.getSelectedItem().toString();
+                String[] selectArray = select.split(";");
+                applicantSsn = Integer.parseInt(selectArray[0].trim());
+                propertyId = Integer.parseInt(selectArray[1].trim());
+                getLabelsAndTextAreas(d);
+                getPropertyLabelsAndDropdown(d);
+                //set the fields based on their selection
+                for (ApplicantEntity applicant : applicants) {
+                    if (applicant.getSsn() == applicantSsn && applicant.getPropertyId().equals(propertyId)) {
+                        fNameField.setText(applicant.getfName()); 
+                        mNameField.setText(applicant.getmName());  
+                        lNameField.setText(applicant.getlName());
+                        ssnField.setText(Integer.toString(applicant.getSsn()));
+                        ssnField.setEnabled(false);
+                        addressField.setText(applicant.getAddress());
+                        creditField.setText(applicant.getCreditScore());
+                        moveField.setText(applicant.getMoveDate());
+                        phoneField.setText(applicant.getPhoneNumber());
+                        employerField.setText(applicant.getEmployer());
+                        jobField.setText(applicant.getJobTitle());
+                        salaryField.setText(applicant.getSalary());
+                        statusList.setSelectedItem(applicant.getApplicationStatus()); 
+                        propertyList.setSelectedItem(applicant.getPropertyId().toString());
+                        propertyList.setEnabled(false);
+                        break;
+                    }
+                }
+            
+                //Submit buttons            
+                JButton submitUpdate = new JButton("Submit");
+                submitUpdate.setBounds(APPLICANTS_CONSTANTS.SUBMIT_POSITION_X, APPLICANTS_CONSTANTS.SUBMIT_POSITION_Y, 
+                    APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
+                submitUpdate.addActionListener((ActionEvent act) -> {
+                    ApplicantEntity applicant = new ApplicantEntity(applicantSsn, fNameField.getText(), 
+                        mNameField.getText(), lNameField.getText(), addressField.getText(), phoneField.getText(),
+                        creditField.getText(), moveField.getText(), employerField.getText(), 
+                        jobField.getText(), salaryField.getText()); 
+                    applicant.setApplicationStatus(statusList.getSelectedItem().toString().trim());
+                    applicant.setPropertyId(propertyId);
+                    
+                    boolean updateSuccess = dao.updateApplicant(applicant);
+                    d.dispose();
+                    
+                    JDialog resultPage = new JDialog(frame, "Results", null);
+                    resultPage.setLayout(null);
+                    resultPage.setSize(100, 100);
+                    
+                    JLabel resultLabel = new JLabel(updateSuccess ? "Success" : "Error");
+                    resultLabel.setBounds(0,0, APPLICANTS_CONSTANTS.LABEL_SIZE_WIDTH, 
+                            APPLICANTS_CONSTANTS.LABEL_SIZE_HEIGHT);
+                    resultPage.add(resultLabel);
+                    
+                    resultPage.setVisible(true);
+                });
+                d.add(submitUpdate);
+                selectApplicant.dispose();
+                d.setVisible(true);
+            });
+            selectApplicant.add(submit);
+            
+            selectApplicant.setVisible(true);
+        });
+        card1.add(updateApplicants);
         
         return card1;
     }   
@@ -288,10 +378,35 @@ public class Applicants {
         salaryField.setBounds(APPLICANTS_CONSTANTS.SALARY_TEXT_POSITION_X, APPLICANTS_CONSTANTS.SALARY_TEXT_POSITION_Y, 
             APPLICANTS_CONSTANTS.TEXT_AREA_WIDTH, APPLICANTS_CONSTANTS.TEXT_AREA_HEIGHT);
         d.add(salaryField);
+        
+        statusLabel = new JLabel("Status:");
+        statusLabel.setBounds(APPLICANTS_CONSTANTS.STATUS_LABEL_POSITION_X, APPLICANTS_CONSTANTS.STATUS_LABEL_POSITION_Y,
+            APPLICANTS_CONSTANTS.LABEL_SIZE_WIDTH, APPLICANTS_CONSTANTS.LABEL_SIZE_HEIGHT);
+        d.add(statusLabel);
+
+        statusList = new JComboBox();
+        statusList.setBounds(APPLICANTS_CONSTANTS.STATUS_DROPDOWN_POSITION_X, APPLICANTS_CONSTANTS.STATUS_DROPDOWN_POSITION_Y,
+            APPLICANTS_CONSTANTS.DROPDOWN_WIDTH, APPLICANTS_CONSTANTS.DROPDOWN_HEIGHT);
+        statusList.addItem("");
+        for (String status : APPLICANTS_CONSTANTS.STATUS_OPTIONS) {
+            statusList.addItem(status);
+        }
+        d.add(statusList);
     }
     
-    public static List<PropertyEntity> getPropertiesToApplyFor() { 
-        
-        return null;
+    public static void getPropertyLabelsAndDropdown(JDialog d) { 
+        propertyLabel = new JLabel("Property:");
+        propertyLabel.setBounds(APPLICANTS_CONSTANTS.PROPERTY_LABEL_POSITION_X, APPLICANTS_CONSTANTS.PROPERTY_LABEL_POSITION_Y,
+            APPLICANTS_CONSTANTS.LABEL_SIZE_WIDTH, APPLICANTS_CONSTANTS.LABEL_SIZE_HEIGHT);
+        d.add(propertyLabel);
+
+        propertyList = new JComboBox();
+        propertyList.setBounds(APPLICANTS_CONSTANTS.PROPERTY_DROPDOWN_POSITION_X, APPLICANTS_CONSTANTS.PROPERTY_DROPDOWN_POSITION_Y,
+            APPLICANTS_CONSTANTS.DROPDOWN_WIDTH, APPLICANTS_CONSTANTS.DROPDOWN_HEIGHT);
+        propertyList.addItem("");
+        for (PropertyEntity property : new PropertiesHibernateDao().propertyList()) {
+            propertyList.addItem(property.getPropertyID().toString());
+        }
+        d.add(propertyList);
     }
 }
