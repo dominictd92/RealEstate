@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Seller_Sells_Property", schema = "RealEstate", catalog = "")
@@ -9,13 +10,12 @@ import java.math.BigDecimal;
 public class SellerSellsPropertyEntity {
     private int sellerSsn;
     private int propertyPropertyId;
-    private int propertyTennantSsn;
     private BigDecimal price;
     private SellerEntity sellerBySellerSsn;
-    private PropertyEntity property;
+    private Collection<PropertyEntity> propertyByPropertyId;
 
     @Id
-    @Column(name = "Seller_ssn")
+    @Column(name = "Seller_ssn", nullable = false)
     public int getSellerSsn() {
         return sellerSsn;
     }
@@ -25,7 +25,7 @@ public class SellerSellsPropertyEntity {
     }
 
     @Id
-    @Column(name = "Property_propertyID")
+    @Column(name = "Property_propertyID", nullable = false)
     public int getPropertyPropertyId() {
         return propertyPropertyId;
     }
@@ -34,18 +34,8 @@ public class SellerSellsPropertyEntity {
         this.propertyPropertyId = propertyPropertyId;
     }
 
-    @Id
-    @Column(name = "Property_Tennant_ssn")
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
-    }
-
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
-    }
-
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = true, precision = 2)
     public BigDecimal getPrice() {
         return price;
     }
@@ -63,7 +53,6 @@ public class SellerSellsPropertyEntity {
 
         if (sellerSsn != that.sellerSsn) return false;
         if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
 
         return true;
@@ -73,7 +62,6 @@ public class SellerSellsPropertyEntity {
     public int hashCode() {
         int result = sellerSsn;
         result = 31 * result + propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }
@@ -88,13 +76,12 @@ public class SellerSellsPropertyEntity {
         this.sellerBySellerSsn = sellerBySellerSsn;
     }
 
-    @ManyToOne
-    @JoinColumns({@JoinColumn(name = "Property_propertyID", referencedColumnName = "propertyID", nullable = false), @JoinColumn(name = "Property_Tennant_ssn", referencedColumnName = "Tennant_ssn", nullable = false)})
-    public PropertyEntity getProperty() {
-        return property;
+    @OneToMany(mappedBy = "sellerSellsPropertyByPropertyId")
+    public Collection<PropertyEntity> getPropertyByPropertyId() {
+        return propertyByPropertyId;
     }
 
-    public void setProperty(PropertyEntity property) {
-        this.property = property;
+    public void setPropertyByPropertyId(Collection<PropertyEntity> propertyByPropertyId) {
+        this.propertyByPropertyId = propertyByPropertyId;
     }
 }

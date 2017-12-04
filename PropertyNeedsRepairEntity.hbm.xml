@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entities.PropertyNeedsRepairEntity" table="Property_Needs_Repair" schema="RealEstate">
+        <id name="propertyRepairId">
+            <column name="Property_RepairID" sql-type="int(11)"/>
+        </id>
+        <property name="repairRepairId">
+            <column name="Repair_repairId" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="propertyPropertyId">
+            <column name="Property_propertyID" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="repairByRepairRepairId" class="entities.RepairEntity">
+            <column name="Repair_repairId" not-null="true"/>
+        </many-to-one>
+        <set name="propertyByPropertyId" inverse="true">
+            <key>
+                <column name="propertyID"/>
+            </key>
+            <one-to-many not-found="ignore" class="entities.PropertyEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -6,100 +6,83 @@ import javax.persistence.*;
 @Table(name = "Property", schema = "RealEstate", catalog = "")
 @IdClass(PropertyEntityPK.class)
 public class PropertyEntity {
-    private Integer propertyID;
-    private Integer deckOrPatio;
-    private Integer washer;
-    private Integer dryer;
-    private Integer offStreetParking;
+    private int propertyId;
+    private String deckOrPatio;
+    private String washer;
+    private String dryer;
+    private String offStreetParking;
     private Integer numberOfBaths;
     private String buildingType;
     private String phoneNumber;
-    private Integer basement;
+    private String basement;
     private String parkingType;
-    private Integer numOfRooms;
+    private String numOfRooms;
     private Integer zipCode;
     private String streetAddress;
     private String city;
     private String state;
     private Integer numOfTennants;
-    private Integer tennantSsn;
-    private ProperttyNeedsRepairEntity properttyNeedsRepair;
-    
-    public PropertyEntity (Integer propertyID, String streetAddress, String city, String state, Integer zipCode, 
-            String phoneNumber, Integer numOfRooms, Integer numberOfBaths, Integer tennant_ssn, Integer numOfTennants, 
-            Integer washer, Integer dryer, Integer deckOrPatio, Integer basement) {
-        this.propertyID = propertyID;
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.phoneNumber = phoneNumber;
-        this.numOfRooms = numOfRooms;
-        this.numberOfBaths = numberOfBaths;
-        this.washer = washer;
-        this.dryer = dryer;
-        this.deckOrPatio = deckOrPatio;
-        this.basement = basement;
-        this.tennantSsn = tennant_ssn;
-        this.numOfTennants = numOfTennants;
-    }
-    
-    public PropertyEntity() { 
-        //null
-    }
-    
+    private int tennantSsn;
+    private ApplicantAppliesForPropertyEntity applicantAppliesForPropertyByPropertyId;
+    private EmployeeWorksAtPropertyEntity employeeWorksAtPropertyByPropertyId;
+    private TennantEntity tennantByTennantSsn;
+    private PropertyNeedsRepairEntity propertyNeedsRepairByPropertyId;
+    private PropertyHasAmenityEntity propertyHasAmenityByPropertyId;
+    private PropertyHasExpenseEntity propertyHasExpenseByPropertyId;
+    private SellerSellsPropertyEntity sellerSellsPropertyByPropertyId;
+
     @Id
-    @Column(name = "propertyID")
-    public Integer getPropertyID() {
-        return propertyID;
+    @Column(name = "propertyID", nullable = false)
+    public int getPropertyId() {
+        return propertyId;
     }
 
-    public void setPropertyID(Integer propertyID) {
-        this.propertyID = propertyID;
+    public void setPropertyId(int propertyId) {
+        this.propertyId = propertyId;
     }
 
     @Basic
-    @Column(name = "deckOrPatio")
-    public Integer getDeckOrPatio() {
+    @Column(name = "deckOrPatio", nullable = true, length = 45)
+    public String getDeckOrPatio() {
         return deckOrPatio;
     }
 
-    public void setDeckOrPatio(Integer deckOrPatio) {
+    public void setDeckOrPatio(String deckOrPatio) {
         this.deckOrPatio = deckOrPatio;
     }
 
     @Basic
-    @Column(name = "washer")
-    public Integer getWasher() {
+    @Column(name = "washer", nullable = true, length = 45)
+    public String getWasher() {
         return washer;
     }
 
-    public void setWasher(Integer washer) {
+    public void setWasher(String washer) {
         this.washer = washer;
     }
 
     @Basic
-    @Column(name = "dryer")
-    public Integer getDryer() {
+    @Column(name = "dryer", nullable = true, length = 45)
+    public String getDryer() {
         return dryer;
     }
 
-    public void setDryer(Integer dryer) {
+    public void setDryer(String dryer) {
         this.dryer = dryer;
     }
 
     @Basic
-    @Column(name = "offStreetParking")
-    public Integer getOffStreetParking() {
+    @Column(name = "offStreetParking", nullable = true, length = 45)
+    public String getOffStreetParking() {
         return offStreetParking;
     }
 
-    public void setOffStreetParking(Integer offStreetParking) {
+    public void setOffStreetParking(String offStreetParking) {
         this.offStreetParking = offStreetParking;
     }
 
     @Basic
-    @Column(name = "numberOfBaths")
+    @Column(name = "numberOfBaths", nullable = true)
     public Integer getNumberOfBaths() {
         return numberOfBaths;
     }
@@ -109,7 +92,7 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "buildingType")
+    @Column(name = "buildingType", nullable = true, length = 45)
     public String getBuildingType() {
         return buildingType;
     }
@@ -119,7 +102,7 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "phoneNumber")
+    @Column(name = "phoneNumber", nullable = true, length = 45)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -129,17 +112,17 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "basement")
-    public Integer getBasement() {
+    @Column(name = "basement", nullable = true, length = 45)
+    public String getBasement() {
         return basement;
     }
 
-    public void setBasement(Integer basement) {
+    public void setBasement(String basement) {
         this.basement = basement;
     }
 
     @Basic
-    @Column(name = "parkingType")
+    @Column(name = "parkingType", nullable = true, length = 45)
     public String getParkingType() {
         return parkingType;
     }
@@ -149,17 +132,17 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "numOfRooms")
-    public Integer getNumOfRooms() {
+    @Column(name = "numOfRooms", nullable = true, length = 45)
+    public String getNumOfRooms() {
         return numOfRooms;
     }
 
-    public void setNumOfRooms(Integer numOfRooms) {
+    public void setNumOfRooms(String numOfRooms) {
         this.numOfRooms = numOfRooms;
     }
 
     @Basic
-    @Column(name = "zipCode")
+    @Column(name = "zipCode", nullable = true)
     public Integer getZipCode() {
         return zipCode;
     }
@@ -169,7 +152,7 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "streetAddress")
+    @Column(name = "streetAddress", nullable = true, length = 45)
     public String getStreetAddress() {
         return streetAddress;
     }
@@ -179,7 +162,7 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "city")
+    @Column(name = "city", nullable = true, length = 45)
     public String getCity() {
         return city;
     }
@@ -189,7 +172,7 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "state")
+    @Column(name = "state", nullable = true, length = 45)
     public String getState() {
         return state;
     }
@@ -199,7 +182,7 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "numOfTennants")
+    @Column(name = "numOfTennants", nullable = true)
     public Integer getNumOfTennants() {
         return numOfTennants;
     }
@@ -209,12 +192,12 @@ public class PropertyEntity {
     }
 
     @Id
-    @Column(name = "Tennant_ssn")
-    public Integer getTennantSsn() {
+    @Column(name = "Tennant_ssn", nullable = false)
+    public int getTennantSsn() {
         return tennantSsn;
     }
 
-    public void setTennantSsn(Integer tennantSsn) {
+    public void setTennantSsn(int tennantSsn) {
         this.tennantSsn = tennantSsn;
     }
 
@@ -225,7 +208,7 @@ public class PropertyEntity {
 
         PropertyEntity that = (PropertyEntity) o;
 
-        if (propertyID != that.propertyID) return false;
+        if (propertyId != that.propertyId) return false;
         if (tennantSsn != that.tennantSsn) return false;
         if (deckOrPatio != null ? !deckOrPatio.equals(that.deckOrPatio) : that.deckOrPatio != null) return false;
         if (washer != null ? !washer.equals(that.washer) : that.washer != null) return false;
@@ -252,7 +235,7 @@ public class PropertyEntity {
 
     @Override
     public int hashCode() {
-        int result = propertyID.intValue();
+        int result = propertyId;
         result = 31 * result + (deckOrPatio != null ? deckOrPatio.hashCode() : 0);
         result = 31 * result + (washer != null ? washer.hashCode() : 0);
         result = 31 * result + (dryer != null ? dryer.hashCode() : 0);
@@ -272,12 +255,73 @@ public class PropertyEntity {
         return result;
     }
 
-    @OneToOne(mappedBy = "property")
-    public ProperttyNeedsRepairEntity getProperttyNeedsRepair() {
-        return properttyNeedsRepair;
+    @ManyToOne
+    @JoinColumn(name = "propertyID", referencedColumnName = "Property_propertyID", nullable = false)
+    public ApplicantAppliesForPropertyEntity getApplicantAppliesForPropertyByPropertyId() {
+        return applicantAppliesForPropertyByPropertyId;
     }
 
-    public void setProperttyNeedsRepair(ProperttyNeedsRepairEntity properttyNeedsRepair) {
-        this.properttyNeedsRepair = properttyNeedsRepair;
+    public void setApplicantAppliesForPropertyByPropertyId(ApplicantAppliesForPropertyEntity applicantAppliesForPropertyByPropertyId) {
+        this.applicantAppliesForPropertyByPropertyId = applicantAppliesForPropertyByPropertyId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "propertyID", referencedColumnName = "Property_propertyID", nullable = false)
+    public EmployeeWorksAtPropertyEntity getEmployeeWorksAtPropertyByPropertyId() {
+        return employeeWorksAtPropertyByPropertyId;
+    }
+
+    public void setEmployeeWorksAtPropertyByPropertyId(EmployeeWorksAtPropertyEntity employeeWorksAtPropertyByPropertyId) {
+        this.employeeWorksAtPropertyByPropertyId = employeeWorksAtPropertyByPropertyId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Tennant_ssn", referencedColumnName = "ssn", nullable = false)
+    public TennantEntity getTennantByTennantSsn() {
+        return tennantByTennantSsn;
+    }
+
+    public void setTennantByTennantSsn(TennantEntity tennantByTennantSsn) {
+        this.tennantByTennantSsn = tennantByTennantSsn;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "propertyID", referencedColumnName = "Property_propertyID", nullable = false)
+    public PropertyNeedsRepairEntity getPropertyNeedsRepairByPropertyId() {
+        return propertyNeedsRepairByPropertyId;
+    }
+
+    public void setPropertyNeedsRepairByPropertyId(PropertyNeedsRepairEntity propertyNeedsRepairByPropertyId) {
+        this.propertyNeedsRepairByPropertyId = propertyNeedsRepairByPropertyId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "propertyID", referencedColumnName = "Property_propertyID", nullable = false)
+    public PropertyHasAmenityEntity getPropertyHasAmenityByPropertyId() {
+        return propertyHasAmenityByPropertyId;
+    }
+
+    public void setPropertyHasAmenityByPropertyId(PropertyHasAmenityEntity propertyHasAmenityByPropertyId) {
+        this.propertyHasAmenityByPropertyId = propertyHasAmenityByPropertyId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "propertyID", referencedColumnName = "Property_propertyID", nullable = false)
+    public PropertyHasExpenseEntity getPropertyHasExpenseByPropertyId() {
+        return propertyHasExpenseByPropertyId;
+    }
+
+    public void setPropertyHasExpenseByPropertyId(PropertyHasExpenseEntity propertyHasExpenseByPropertyId) {
+        this.propertyHasExpenseByPropertyId = propertyHasExpenseByPropertyId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "propertyID", referencedColumnName = "Property_propertyID", nullable = false)
+    public SellerSellsPropertyEntity getSellerSellsPropertyByPropertyId() {
+        return sellerSellsPropertyByPropertyId;
+    }
+
+    public void setSellerSellsPropertyByPropertyId(SellerSellsPropertyEntity sellerSellsPropertyByPropertyId) {
+        this.sellerSellsPropertyByPropertyId = sellerSellsPropertyByPropertyId;
     }
 }

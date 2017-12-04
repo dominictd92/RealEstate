@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entities.PropertyEntity" table="Property" schema="RealEstate">
+        <composite-id mapped="true" class="entities.PropertyEntityPK">
+            <key-property name="propertyId">
+                <column name="propertyID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="tennantSsn">
+                <column name="Tennant_ssn" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+        <property name="deckOrPatio">
+            <column name="deckOrPatio" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="washer">
+            <column name="washer" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="dryer">
+            <column name="dryer" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="offStreetParking">
+            <column name="offStreetParking" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="numberOfBaths">
+            <column name="numberOfBaths" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="buildingType">
+            <column name="buildingType" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="phoneNumber">
+            <column name="phoneNumber" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="basement">
+            <column name="basement" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="parkingType">
+            <column name="parkingType" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="numOfRooms">
+            <column name="numOfRooms" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="zipCode">
+            <column name="zipCode" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="streetAddress">
+            <column name="streetAddress" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="city">
+            <column name="city" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="state">
+            <column name="state" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="numOfTennants">
+            <column name="numOfTennants" sql-type="int(11)" not-null="true"/>
+        </property>
+        <many-to-one name="applicantAppliesForPropertyByPropertyId" class="entities.ApplicantAppliesForPropertyEntity">
+            <column name="propertyID"/>
+        </many-to-one>
+        <many-to-one name="employeeWorksAtPropertyByPropertyId" class="entities.EmployeeWorksAtPropertyEntity">
+            <column name="propertyID"/>
+        </many-to-one>
+        <many-to-one name="tennantByTennantSsn" class="entities.TennantEntity">
+            <column name="Tennant_ssn"/>
+        </many-to-one>
+        <many-to-one name="propertyNeedsRepairByPropertyId" class="entities.PropertyNeedsRepairEntity">
+            <column name="propertyID"/>
+        </many-to-one>
+        <many-to-one name="propertyHasAmenityByPropertyId" class="entities.PropertyHasAmenityEntity">
+            <column name="propertyID"/>
+        </many-to-one>
+        <many-to-one name="propertyHasExpenseByPropertyId" class="entities.PropertyHasExpenseEntity">
+            <column name="propertyID"/>
+        </many-to-one>
+        <many-to-one name="sellerSellsPropertyByPropertyId" class="entities.SellerSellsPropertyEntity">
+            <column name="propertyID"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

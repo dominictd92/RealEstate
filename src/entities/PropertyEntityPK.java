@@ -8,7 +8,7 @@ public class PropertyEntityPK implements Serializable {
     private int propertyId;
     private int tennantSsn;
 
-    @Column(name = "propertyID")
+    @Column(name = "propertyID", nullable = false)
     @Id
     public int getPropertyId() {
         return propertyId;
@@ -18,7 +18,7 @@ public class PropertyEntityPK implements Serializable {
         this.propertyId = propertyId;
     }
 
-    @Column(name = "Tennant_ssn")
+    @Column(name = "Tennant_ssn", nullable = false)
     @Id
     public int getTennantSsn() {
         return tennantSsn;

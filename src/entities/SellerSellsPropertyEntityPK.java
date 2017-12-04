@@ -7,9 +7,8 @@ import java.io.Serializable;
 public class SellerSellsPropertyEntityPK implements Serializable {
     private int sellerSsn;
     private int propertyPropertyId;
-    private int propertyTennantSsn;
 
-    @Column(name = "Seller_ssn")
+    @Column(name = "Seller_ssn", nullable = false)
     @Id
     public int getSellerSsn() {
         return sellerSsn;
@@ -19,7 +18,7 @@ public class SellerSellsPropertyEntityPK implements Serializable {
         this.sellerSsn = sellerSsn;
     }
 
-    @Column(name = "Property_propertyID")
+    @Column(name = "Property_propertyID", nullable = false)
     @Id
     public int getPropertyPropertyId() {
         return propertyPropertyId;
@@ -27,16 +26,6 @@ public class SellerSellsPropertyEntityPK implements Serializable {
 
     public void setPropertyPropertyId(int propertyPropertyId) {
         this.propertyPropertyId = propertyPropertyId;
-    }
-
-    @Column(name = "Property_Tennant_ssn")
-    @Id
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
-    }
-
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
     }
 
     @Override
@@ -48,7 +37,6 @@ public class SellerSellsPropertyEntityPK implements Serializable {
 
         if (sellerSsn != that.sellerSsn) return false;
         if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
 
         return true;
     }
@@ -57,7 +45,6 @@ public class SellerSellsPropertyEntityPK implements Serializable {
     public int hashCode() {
         int result = sellerSsn;
         result = 31 * result + propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
         return result;
     }
 }

@@ -1,45 +1,45 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Property_has_Expense", schema = "RealEstate", catalog = "")
-@IdClass(PropertyHasExpenseEntityPK.class)
 public class PropertyHasExpenseEntity {
-    private int expenseExpenseId;
-    private int propertyPropertyId;
-    private int propertyTennantSsn;
+    private Integer expenseExpenseId;
+    private Integer propertyPropertyId;
+    private int propertyExpenseId;
     private ExpenseEntity expenseByExpenseExpenseId;
-    private PropertyEntity property;
+    private Collection<PropertyEntity> propertyByPropertyId;
 
-    @Id
-    @Column(name = "Expense_expenseId")
-    public int getExpenseExpenseId() {
+    @Basic
+    @Column(name = "Expense_expenseId", nullable = true)
+    public Integer getExpenseExpenseId() {
         return expenseExpenseId;
     }
 
-    public void setExpenseExpenseId(int expenseExpenseId) {
+    public void setExpenseExpenseId(Integer expenseExpenseId) {
         this.expenseExpenseId = expenseExpenseId;
     }
 
-    @Id
-    @Column(name = "Property_propertyID")
-    public int getPropertyPropertyId() {
+    @Basic
+    @Column(name = "Property_propertyID", nullable = true)
+    public Integer getPropertyPropertyId() {
         return propertyPropertyId;
     }
 
-    public void setPropertyPropertyId(int propertyPropertyId) {
+    public void setPropertyPropertyId(Integer propertyPropertyId) {
         this.propertyPropertyId = propertyPropertyId;
     }
 
     @Id
-    @Column(name = "Property_Tennant_ssn")
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
+    @Column(name = "Property_ExpenseID", nullable = false)
+    public int getPropertyExpenseId() {
+        return propertyExpenseId;
     }
 
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
+    public void setPropertyExpenseId(int propertyExpenseId) {
+        this.propertyExpenseId = propertyExpenseId;
     }
 
     @Override
@@ -49,23 +49,25 @@ public class PropertyHasExpenseEntity {
 
         PropertyHasExpenseEntity that = (PropertyHasExpenseEntity) o;
 
-        if (expenseExpenseId != that.expenseExpenseId) return false;
-        if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
+        if (propertyExpenseId != that.propertyExpenseId) return false;
+        if (expenseExpenseId != null ? !expenseExpenseId.equals(that.expenseExpenseId) : that.expenseExpenseId != null)
+            return false;
+        if (propertyPropertyId != null ? !propertyPropertyId.equals(that.propertyPropertyId) : that.propertyPropertyId != null)
+            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = expenseExpenseId;
-        result = 31 * result + propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
+        int result = expenseExpenseId != null ? expenseExpenseId.hashCode() : 0;
+        result = 31 * result + (propertyPropertyId != null ? propertyPropertyId.hashCode() : 0);
+        result = 31 * result + propertyExpenseId;
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Expense_expenseId", referencedColumnName = "expenseId", nullable = false)
+    @JoinColumn(name = "Expense_expenseId", referencedColumnName = "expenseId")
     public ExpenseEntity getExpenseByExpenseExpenseId() {
         return expenseByExpenseExpenseId;
     }
@@ -74,13 +76,12 @@ public class PropertyHasExpenseEntity {
         this.expenseByExpenseExpenseId = expenseByExpenseExpenseId;
     }
 
-    @ManyToOne
-    @JoinColumns({@JoinColumn(name = "Property_propertyID", referencedColumnName = "propertyID", nullable = false), @JoinColumn(name = "Property_Tennant_ssn", referencedColumnName = "Tennant_ssn", nullable = false)})
-    public PropertyEntity getProperty() {
-        return property;
+    @OneToMany(mappedBy = "propertyHasExpenseByPropertyId")
+    public Collection<PropertyEntity> getPropertyByPropertyId() {
+        return propertyByPropertyId;
     }
 
-    public void setProperty(PropertyEntity property) {
-        this.property = property;
+    public void setPropertyByPropertyId(Collection<PropertyEntity> propertyByPropertyId) {
+        this.propertyByPropertyId = propertyByPropertyId;
     }
 }
