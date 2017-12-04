@@ -6,41 +6,15 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "Employee", schema = "RealEstate", catalog = "")
 public class EmployeeEntity {
+    private int ssn;
+    private String fName;
+    private String mName;
+    private String lName;
+    private BigDecimal pay;
+    private String phoneNumber;
+
     @Id
     @Column(name = "ssn")
-    private int ssn;
-    @Basic
-    @Column(name = "f_name")
-    private String fName;
-    @Basic
-    @Column(name = "m_name")
-    private String mName;
-    @Basic
-    @Column(name = "l_name")
-    private String lName;
-    @Basic
-    @Column(name = "pay")
-    private BigDecimal pay;
-    @Basic
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
-    
-    @Transient
-    private int propertyId;
-
-    public EmployeeEntity() { 
-        //null constructor
-    }
-    
-    public EmployeeEntity(Integer ssn, String fName, String mName, String lName, BigDecimal pay, String phoneNumber) {
-        this.ssn = ssn; 
-        this.fName = fName;
-        this.mName = mName;
-        this.lName = lName;
-        this.pay = pay;
-        this.phoneNumber = phoneNumber;
-    }
-
     public int getSsn() {
         return ssn;
     }
@@ -49,6 +23,8 @@ public class EmployeeEntity {
         this.ssn = ssn;
     }
 
+    @Basic
+    @Column(name = "f_name")
     public String getfName() {
         return fName;
     }
@@ -57,6 +33,8 @@ public class EmployeeEntity {
         this.fName = fName;
     }
 
+    @Basic
+    @Column(name = "m_name")
     public String getmName() {
         return mName;
     }
@@ -65,6 +43,8 @@ public class EmployeeEntity {
         this.mName = mName;
     }
 
+    @Basic
+    @Column(name = "l_name")
     public String getlName() {
         return lName;
     }
@@ -73,6 +53,8 @@ public class EmployeeEntity {
         this.lName = lName;
     }
 
+    @Basic
+    @Column(name = "pay")
     public BigDecimal getPay() {
         return pay;
     }
@@ -81,19 +63,14 @@ public class EmployeeEntity {
         this.pay = pay;
     }
 
+    @Basic
+    @Column(name = "phoneNumber")
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-    public int getPropertyId() {
-        return propertyId;
-    }
-    
-    public void setPropertyId(int propertyId) {
-        this.propertyId = propertyId;
     }
 
     @Override
@@ -122,19 +99,5 @@ public class EmployeeEntity {
         result = 31 * result + (pay != null ? pay.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         return result;
-    }
-    
-    public Object[] getColumnArray() {
-        String[] columns = new String[] {
-            "SSN", "First Name", "Middle Name", "Last Name", "Pay", "Phone Number", "PropertyID"
-        };
-        return columns; 
-    }
-    
-    public Object[] getEmployeeArray() { 
-        Object[] rows = new Object[] {
-            this.ssn, this.fName, this.mName, this.lName, this.pay, this.phoneNumber, this.propertyId
-        };
-        return rows;
     }
 }

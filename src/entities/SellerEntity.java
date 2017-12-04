@@ -1,46 +1,21 @@
 package entities;
 
-import java.math.BigDecimal;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Seller", schema = "RealEstate", catalog = "")
 public class SellerEntity {
-    @Id
-    @Column(name = "ssn")
     private int ssn;
-    @Basic
-    @Column(name = "zipCode")
     private Integer zipCode;
-    @Basic
-    @Column(name = "streetAddress")
     private String streetAddress;
-    @Basic
-    @Column(name = "city")
     private String city;
-    @Basic
-    @Column(name = "State")
     private String state;
-    @Basic
-    @Column(name = "phoneNumber")
     private String phoneNumber;
-    @Basic
-    @Column(name = "f_name")
     private String fName;
-    @Basic
-    @Column(name = "m_name")
     private String mName;
-    @Basic
-    @Column(name = "l_name")
     private String lName;
-    
-    @Transient
-    private BigDecimal price; 
 
-    @Transient 
-    private Integer propertyID;
-
-    public SellerEntity(Integer ssn, Integer zipCode, String streetAddress, String city, String state, String phoneNumber, String fName, String mName, String lName) {
+    public SellerEntity(int ssn, Integer zipCode, String streetAddress, String city, String state, String phoneNumber, String fName, String mName, String lName) {
         this.ssn = ssn;
         this.zipCode = zipCode;
         this.streetAddress = streetAddress;
@@ -52,9 +27,13 @@ public class SellerEntity {
         this.lName = lName;
     }
 
+
+
     public SellerEntity() {
     }
 
+    @Id
+    @Column(name = "ssn")
     public int getSsn() {
         return ssn;
     }
@@ -63,6 +42,8 @@ public class SellerEntity {
         this.ssn = ssn;
     }
 
+    @Basic
+    @Column(name = "zipCode")
     public Integer getZipCode() {
         return zipCode;
     }
@@ -71,6 +52,8 @@ public class SellerEntity {
         this.zipCode = zipCode;
     }
 
+    @Basic
+    @Column(name = "streetAddress")
     public String getStreetAddress() {
         return streetAddress;
     }
@@ -79,6 +62,8 @@ public class SellerEntity {
         this.streetAddress = streetAddress;
     }
 
+    @Basic
+    @Column(name = "city")
     public String getCity() {
         return city;
     }
@@ -87,6 +72,8 @@ public class SellerEntity {
         this.city = city;
     }
 
+    @Basic
+    @Column(name = "State")
     public String getState() {
         return state;
     }
@@ -95,6 +82,8 @@ public class SellerEntity {
         this.state = state;
     }
 
+    @Basic
+    @Column(name = "phoneNumber")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -103,6 +92,8 @@ public class SellerEntity {
         this.phoneNumber = phoneNumber;
     }
 
+    @Basic
+    @Column(name = "f_name")
     public String getfName() {
         return fName;
     }
@@ -111,6 +102,8 @@ public class SellerEntity {
         this.fName = fName;
     }
 
+    @Basic
+    @Column(name = "m_name")
     public String getmName() {
         return mName;
     }
@@ -119,28 +112,14 @@ public class SellerEntity {
         this.mName = mName;
     }
 
+    @Basic
+    @Column(name = "l_name")
     public String getlName() {
         return lName;
     }
 
     public void setlName(String lName) {
         this.lName = lName;
-    }
-    
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Integer getPropertyID() {
-        return propertyID;
-    }
-
-    public void setPropertyID(Integer propertyID) {
-        this.propertyID = propertyID;
     }
 
     @Override
@@ -176,21 +155,5 @@ public class SellerEntity {
         result = 31 * result + (mName != null ? mName.hashCode() : 0);
         result = 31 * result + (lName != null ? lName.hashCode() : 0);
         return result;
-    }
-    
-    public Object[] getColumnArray() {
-        String[] columns = new String[] {
-            "SSN", "First Name", "Middle Name", "Last Name", "Address", "Zip Code",
-            "City", "State", "Phone Number", "PropertyID", "Price"
-        };
-        return columns; 
-    }
-    
-    public Object[] getSellerArray() { 
-        Object[] rows = new Object[] {
-            this.ssn, this.fName, this.mName, this.lName, this.streetAddress, this.zipCode,
-             this.city, this.state, this.phoneNumber, this.propertyID, this.price
-        };
-        return rows;
     }
 }

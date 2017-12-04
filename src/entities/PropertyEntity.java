@@ -272,7 +272,7 @@ public class PropertyEntity {
         return result;
     }
 
-    @OneToOne(mappedBy = "property")
+    @OneToOne(mappedBy = "realEstate/property")
     public ProperttyNeedsRepairEntity getProperttyNeedsRepair() {
         return properttyNeedsRepair;
     }
