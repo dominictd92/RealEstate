@@ -1,8 +1,9 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Tennant", schema = "RealEstate", catalog = "")
@@ -19,9 +20,10 @@ public class TennantEntity {
     private BigDecimal rent;
     private Timestamp leaseEndDate;
     private DependentLivesWithTennantEntity dependentLivesWithTennantBySsn;
+    private Collection<PropertyEntity> propertiesBySsn;
 
     @Id
-    @Column(name = "ssn")
+    @Column(name = "ssn", nullable = false)
     public int getSsn() {
         return ssn;
     }
@@ -31,7 +33,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "f_name")
+    @Column(name = "f_name", nullable = true, length = 45)
     public String getfName() {
         return fName;
     }
@@ -41,7 +43,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "m_name")
+    @Column(name = "m_name", nullable = true, length = 45)
     public String getmName() {
         return mName;
     }
@@ -51,7 +53,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "l_name")
+    @Column(name = "l_name", nullable = true, length = 45)
     public String getlName() {
         return lName;
     }
@@ -61,7 +63,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "birthdate")
+    @Column(name = "birthdate", nullable = true)
     public Timestamp getBirthdate() {
         return birthdate;
     }
@@ -71,7 +73,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "phoneNumber")
+    @Column(name = "phoneNumber", nullable = true, length = 45)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -81,7 +83,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "car")
+    @Column(name = "car", nullable = true, length = 45)
     public String getCar() {
         return car;
     }
@@ -91,7 +93,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "workStatus")
+    @Column(name = "workStatus", nullable = true, length = 45)
     public String getWorkStatus() {
         return workStatus;
     }
@@ -101,7 +103,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "rentersInsurance")
+    @Column(name = "rentersInsurance", nullable = true, length = 45)
     public String getRentersInsurance() {
         return rentersInsurance;
     }
@@ -111,7 +113,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "rent")
+    @Column(name = "rent", nullable = true, precision = 2)
     public BigDecimal getRent() {
         return rent;
     }
@@ -121,7 +123,7 @@ public class TennantEntity {
     }
 
     @Basic
-    @Column(name = "leaseEndDate")
+    @Column(name = "leaseEndDate", nullable = true)
     public Timestamp getLeaseEndDate() {
         return leaseEndDate;
     }
@@ -176,5 +178,14 @@ public class TennantEntity {
 
     public void setDependentLivesWithTennantBySsn(DependentLivesWithTennantEntity dependentLivesWithTennantBySsn) {
         this.dependentLivesWithTennantBySsn = dependentLivesWithTennantBySsn;
+    }
+
+    @OneToMany(mappedBy = "tennantByTennantSsn")
+    public Collection<PropertyEntity> getPropertiesBySsn() {
+        return propertiesBySsn;
+    }
+
+    public void setPropertiesBySsn(Collection<PropertyEntity> propertiesBySsn) {
+        this.propertiesBySsn = propertiesBySsn;
     }
 }

@@ -1,15 +1,17 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Amenity", schema = "RealEstate", catalog = "")
 public class AmenityEntity {
     private int amenityid;
     private String amenity;
+    private Collection<PropertyHasAmenityEntity> propertyHasAmenitiesByAmenityid;
 
     @Id
-    @Column(name = "amenityid")
+    @Column(name = "amenityid", nullable = false)
     public int getAmenityid() {
         return amenityid;
     }
@@ -19,7 +21,7 @@ public class AmenityEntity {
     }
 
     @Basic
-    @Column(name = "amenity")
+    @Column(name = "amenity", nullable = true, length = 45)
     public String getAmenity() {
         return amenity;
     }
@@ -46,5 +48,14 @@ public class AmenityEntity {
         int result = amenityid;
         result = 31 * result + (amenity != null ? amenity.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "amenityByAmenityAmenityid")
+    public Collection<PropertyHasAmenityEntity> getPropertyHasAmenitiesByAmenityid() {
+        return propertyHasAmenitiesByAmenityid;
+    }
+
+    public void setPropertyHasAmenitiesByAmenityid(Collection<PropertyHasAmenityEntity> propertyHasAmenitiesByAmenityid) {
+        this.propertyHasAmenitiesByAmenityid = propertyHasAmenitiesByAmenityid;
     }
 }

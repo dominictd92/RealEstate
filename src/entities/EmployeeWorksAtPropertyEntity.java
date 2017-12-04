@@ -1,4 +1,4 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.*;
 
@@ -7,12 +7,11 @@ import javax.persistence.*;
 @IdClass(EmployeeWorksAtPropertyEntityPK.class)
 public class EmployeeWorksAtPropertyEntity {
     private int propertyPropertyId;
-    private int propertyTennantSsn;
     private int employeeSsn;
     private EmployeeEntity employeeByEmployeeSsn;
 
     @Id
-    @Column(name = "Property_propertyID")
+    @Column(name = "Property_propertyID", nullable = false)
     public int getPropertyPropertyId() {
         return propertyPropertyId;
     }
@@ -22,17 +21,7 @@ public class EmployeeWorksAtPropertyEntity {
     }
 
     @Id
-    @Column(name = "Property_Tennant_ssn")
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
-    }
-
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
-    }
-
-    @Id
-    @Column(name = "Employee_ssn")
+    @Column(name = "Employee_ssn", nullable = false)
     public int getEmployeeSsn() {
         return employeeSsn;
     }
@@ -49,7 +38,6 @@ public class EmployeeWorksAtPropertyEntity {
         EmployeeWorksAtPropertyEntity that = (EmployeeWorksAtPropertyEntity) o;
 
         if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
         if (employeeSsn != that.employeeSsn) return false;
 
         return true;
@@ -58,7 +46,6 @@ public class EmployeeWorksAtPropertyEntity {
     @Override
     public int hashCode() {
         int result = propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
         result = 31 * result + employeeSsn;
         return result;
     }

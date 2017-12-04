@@ -1,7 +1,8 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Employee", schema = "RealEstate", catalog = "")
@@ -12,9 +13,10 @@ public class EmployeeEntity {
     private String lName;
     private BigDecimal pay;
     private String phoneNumber;
+    private Collection<EmployeeWorksAtPropertyEntity> employeeWorksAtPropertiesBySsn;
 
     @Id
-    @Column(name = "ssn")
+    @Column(name = "ssn", nullable = false)
     public int getSsn() {
         return ssn;
     }
@@ -24,7 +26,7 @@ public class EmployeeEntity {
     }
 
     @Basic
-    @Column(name = "f_name")
+    @Column(name = "f_name", nullable = true, length = 45)
     public String getfName() {
         return fName;
     }
@@ -34,7 +36,7 @@ public class EmployeeEntity {
     }
 
     @Basic
-    @Column(name = "m_name")
+    @Column(name = "m_name", nullable = true, length = 45)
     public String getmName() {
         return mName;
     }
@@ -44,7 +46,7 @@ public class EmployeeEntity {
     }
 
     @Basic
-    @Column(name = "l_name")
+    @Column(name = "l_name", nullable = true, length = 45)
     public String getlName() {
         return lName;
     }
@@ -54,7 +56,7 @@ public class EmployeeEntity {
     }
 
     @Basic
-    @Column(name = "pay")
+    @Column(name = "pay", nullable = true, precision = 2)
     public BigDecimal getPay() {
         return pay;
     }
@@ -64,7 +66,7 @@ public class EmployeeEntity {
     }
 
     @Basic
-    @Column(name = "phoneNumber")
+    @Column(name = "phoneNumber", nullable = true, length = 45)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -99,5 +101,14 @@ public class EmployeeEntity {
         result = 31 * result + (pay != null ? pay.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "employeeByEmployeeSsn")
+    public Collection<EmployeeWorksAtPropertyEntity> getEmployeeWorksAtPropertiesBySsn() {
+        return employeeWorksAtPropertiesBySsn;
+    }
+
+    public void setEmployeeWorksAtPropertiesBySsn(Collection<EmployeeWorksAtPropertyEntity> employeeWorksAtPropertiesBySsn) {
+        this.employeeWorksAtPropertiesBySsn = employeeWorksAtPropertiesBySsn;
     }
 }

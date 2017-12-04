@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="RealEstate.ApplicantAppliesForPropertyEntity" table="Applicant_Applies_For_Property"
+           schema="RealEstate">
+        <composite-id mapped="true" class="RealEstate.ApplicantAppliesForPropertyEntityPK">
+            <key-property name="applicantSsn">
+                <column name="Applicant_ssn" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="propertyPropertyId">
+                <column name="Property_propertyID" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+        <property name="applicationStatus">
+            <column name="applicationStatus" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <many-to-one name="applicantByApplicantSsn" class="RealEstate.ApplicantEntity">
+            <column name="Applicant_ssn"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

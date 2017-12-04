@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="RealEstate.DependentLivesWithTennantEntity" table="Dependent_lives_with_Tennant" schema="RealEstate">
+        <id name="tennantSsn">
+            <column name="Tennant_ssn" sql-type="int(11)"/>
+        </id>
+        <property name="dependentDepId">
+            <column name="Dependent_depId" sql-type="int(11)" not-null="true"/>
+        </property>
+        <many-to-one name="dependentByDependentDepId" class="RealEstate.DependentEntity">
+            <column name="Dependent_depId" not-null="true"/>
+        </many-to-one>
+        <one-to-one name="tennantByTennantSsn" class="RealEstate.TennantEntity"/>
+    </class>
+</hibernate-mapping>

@@ -1,6 +1,7 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Seller", schema = "RealEstate", catalog = "")
@@ -14,26 +15,10 @@ public class SellerEntity {
     private String fName;
     private String mName;
     private String lName;
-
-    public SellerEntity(int ssn, Integer zipCode, String streetAddress, String city, String state, String phoneNumber, String fName, String mName, String lName) {
-        this.ssn = ssn;
-        this.zipCode = zipCode;
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.state = state;
-        this.phoneNumber = phoneNumber;
-        this.fName = fName;
-        this.mName = mName;
-        this.lName = lName;
-    }
-
-
-
-    public SellerEntity() {
-    }
+    private Collection<SellerSellsPropertyEntity> sellerSellsPropertiesBySsn;
 
     @Id
-    @Column(name = "ssn")
+    @Column(name = "ssn", nullable = false)
     public int getSsn() {
         return ssn;
     }
@@ -43,7 +28,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "zipCode")
+    @Column(name = "zipCode", nullable = true)
     public Integer getZipCode() {
         return zipCode;
     }
@@ -53,7 +38,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "streetAddress")
+    @Column(name = "streetAddress", nullable = true, length = 45)
     public String getStreetAddress() {
         return streetAddress;
     }
@@ -63,7 +48,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "city")
+    @Column(name = "city", nullable = true, length = 45)
     public String getCity() {
         return city;
     }
@@ -73,7 +58,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "State")
+    @Column(name = "State", nullable = true, length = 45)
     public String getState() {
         return state;
     }
@@ -83,7 +68,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "phoneNumber")
+    @Column(name = "phoneNumber", nullable = true, length = 45)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -93,7 +78,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "f_name")
+    @Column(name = "f_name", nullable = true, length = 45)
     public String getfName() {
         return fName;
     }
@@ -103,7 +88,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "m_name")
+    @Column(name = "m_name", nullable = true, length = 45)
     public String getmName() {
         return mName;
     }
@@ -113,7 +98,7 @@ public class SellerEntity {
     }
 
     @Basic
-    @Column(name = "l_name")
+    @Column(name = "l_name", nullable = true, length = 45)
     public String getlName() {
         return lName;
     }
@@ -155,5 +140,14 @@ public class SellerEntity {
         result = 31 * result + (mName != null ? mName.hashCode() : 0);
         result = 31 * result + (lName != null ? lName.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "sellerBySellerSsn")
+    public Collection<SellerSellsPropertyEntity> getSellerSellsPropertiesBySsn() {
+        return sellerSellsPropertiesBySsn;
+    }
+
+    public void setSellerSellsPropertiesBySsn(Collection<SellerSellsPropertyEntity> sellerSellsPropertiesBySsn) {
+        this.sellerSellsPropertiesBySsn = sellerSellsPropertiesBySsn;
     }
 }

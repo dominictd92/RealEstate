@@ -1,7 +1,8 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Dependent", schema = "RealEstate", catalog = "")
@@ -11,9 +12,10 @@ public class DependentEntity {
     private String mName;
     private String lName;
     private Timestamp birthDate;
+    private Collection<DependentLivesWithTennantEntity> dependentLivesWithTennantsByDepId;
 
     @Id
-    @Column(name = "depId")
+    @Column(name = "depId", nullable = false)
     public int getDepId() {
         return depId;
     }
@@ -23,7 +25,7 @@ public class DependentEntity {
     }
 
     @Basic
-    @Column(name = "f_name")
+    @Column(name = "f_name", nullable = true, length = 45)
     public String getfName() {
         return fName;
     }
@@ -33,7 +35,7 @@ public class DependentEntity {
     }
 
     @Basic
-    @Column(name = "m_name")
+    @Column(name = "m_name", nullable = true, length = 45)
     public String getmName() {
         return mName;
     }
@@ -43,7 +45,7 @@ public class DependentEntity {
     }
 
     @Basic
-    @Column(name = "l_name")
+    @Column(name = "l_name", nullable = true, length = 45)
     public String getlName() {
         return lName;
     }
@@ -53,7 +55,7 @@ public class DependentEntity {
     }
 
     @Basic
-    @Column(name = "birthDate")
+    @Column(name = "birthDate", nullable = true)
     public Timestamp getBirthDate() {
         return birthDate;
     }
@@ -86,5 +88,14 @@ public class DependentEntity {
         result = 31 * result + (lName != null ? lName.hashCode() : 0);
         result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "dependentByDependentDepId")
+    public Collection<DependentLivesWithTennantEntity> getDependentLivesWithTennantsByDepId() {
+        return dependentLivesWithTennantsByDepId;
+    }
+
+    public void setDependentLivesWithTennantsByDepId(Collection<DependentLivesWithTennantEntity> dependentLivesWithTennantsByDepId) {
+        this.dependentLivesWithTennantsByDepId = dependentLivesWithTennantsByDepId;
     }
 }

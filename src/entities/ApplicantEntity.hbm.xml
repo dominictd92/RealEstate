@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="RealEstate.ApplicantEntity" table="Applicant" schema="RealEstate">
+        <id name="ssn">
+            <column name="ssn" sql-type="int(11)"/>
+        </id>
+        <property name="lName">
+            <column name="l_name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="mName">
+            <column name="m_name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="creditScore">
+            <column name="creditScore" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="address">
+            <column name="address" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="moveDate">
+            <column name="moveDate" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="phoneNumber">
+            <column name="phoneNumber" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="employer">
+            <column name="employer" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="jobTitle">
+            <column name="jobTitle" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="salary">
+            <column name="salary" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="fName">
+            <column name="f_name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <set name="applicantAppliesForPropertiesBySsn" inverse="true">
+            <key>
+                <column name="Applicant_ssn"/>
+            </key>
+            <one-to-many not-found="ignore" class="RealEstate.ApplicantAppliesForPropertyEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

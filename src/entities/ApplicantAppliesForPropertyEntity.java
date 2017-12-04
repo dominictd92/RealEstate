@@ -1,4 +1,4 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.*;
 
@@ -8,12 +8,11 @@ import javax.persistence.*;
 public class ApplicantAppliesForPropertyEntity {
     private int applicantSsn;
     private int propertyPropertyId;
-    private int propertyTennantSsn;
     private String applicationStatus;
     private ApplicantEntity applicantByApplicantSsn;
 
     @Id
-    @Column(name = "Applicant_ssn")
+    @Column(name = "Applicant_ssn", nullable = false)
     public int getApplicantSsn() {
         return applicantSsn;
     }
@@ -23,7 +22,7 @@ public class ApplicantAppliesForPropertyEntity {
     }
 
     @Id
-    @Column(name = "Property_propertyID")
+    @Column(name = "Property_propertyID", nullable = false)
     public int getPropertyPropertyId() {
         return propertyPropertyId;
     }
@@ -32,18 +31,8 @@ public class ApplicantAppliesForPropertyEntity {
         this.propertyPropertyId = propertyPropertyId;
     }
 
-    @Id
-    @Column(name = "Property_Tennant_ssn")
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
-    }
-
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
-    }
-
     @Basic
-    @Column(name = "applicationStatus")
+    @Column(name = "applicationStatus", nullable = true, length = 45)
     public String getApplicationStatus() {
         return applicationStatus;
     }
@@ -61,7 +50,6 @@ public class ApplicantAppliesForPropertyEntity {
 
         if (applicantSsn != that.applicantSsn) return false;
         if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
         if (applicationStatus != null ? !applicationStatus.equals(that.applicationStatus) : that.applicationStatus != null)
             return false;
 
@@ -72,7 +60,6 @@ public class ApplicantAppliesForPropertyEntity {
     public int hashCode() {
         int result = applicantSsn;
         result = 31 * result + propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
         result = 31 * result + (applicationStatus != null ? applicationStatus.hashCode() : 0);
         return result;
     }

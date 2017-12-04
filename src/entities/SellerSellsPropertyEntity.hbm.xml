@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="RealEstate.SellerSellsPropertyEntity" table="Seller_Sells_Property" schema="RealEstate">
+        <composite-id mapped="true" class="RealEstate.SellerSellsPropertyEntityPK">
+            <key-property name="sellerSsn">
+                <column name="Seller_ssn" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="propertyPropertyId">
+                <column name="Property_propertyID" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+        <property name="price">
+            <column name="price" sql-type="decimal(13,2)" precision="13" scale="2" not-null="true"/>
+        </property>
+        <many-to-one name="sellerBySellerSsn" class="RealEstate.SellerEntity">
+            <column name="Seller_ssn"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

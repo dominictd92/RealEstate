@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="RealEstate.TennantEntity" table="Tennant" schema="RealEstate">
+        <id name="ssn">
+            <column name="ssn" sql-type="int(11)"/>
+        </id>
+        <property name="fName">
+            <column name="f_name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="mName">
+            <column name="m_name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="lName">
+            <column name="l_name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="birthdate">
+            <column name="birthdate" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="phoneNumber">
+            <column name="phoneNumber" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="car">
+            <column name="car" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="workStatus">
+            <column name="workStatus" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="rentersInsurance">
+            <column name="rentersInsurance" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="rent">
+            <column name="rent" sql-type="decimal(13,2)" precision="13" scale="2" not-null="true"/>
+        </property>
+        <property name="leaseEndDate">
+            <column name="leaseEndDate" sql-type="datetime" not-null="true"/>
+        </property>
+        <one-to-one name="dependentLivesWithTennantBySsn" class="RealEstate.DependentLivesWithTennantEntity"/>
+        <set name="propertiesBySsn" inverse="true">
+            <key>
+                <column name="Tennant_ssn"/>
+            </key>
+            <one-to-many not-found="ignore" class="RealEstate.PropertyEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

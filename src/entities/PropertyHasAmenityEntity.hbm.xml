@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="RealEstate.PropertyHasAmenityEntity" table="Property_has_Amenity" schema="RealEstate">
+        <id name="porportyAmenityid">
+            <column name="Porporty_amenityid" sql-type="int(11)"/>
+        </id>
+        <property name="amenityAmenityid">
+            <column name="Amenity_amenityid" sql-type="int(11)"/>
+        </property>
+        <property name="propertyPropertyId">
+            <column name="Property_propertyID" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="amenityByAmenityAmenityid" class="RealEstate.AmenityEntity">
+            <column name="Amenity_amenityid"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="RealEstate.EmployeeWorksAtPropertyEntity" table="Employee_Works_At_Property" schema="RealEstate">
+        <composite-id mapped="true" class="RealEstate.EmployeeWorksAtPropertyEntityPK">
+            <key-property name="propertyPropertyId">
+                <column name="Property_propertyID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="employeeSsn">
+                <column name="Employee_ssn" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+        <many-to-one name="employeeByEmployeeSsn" class="RealEstate.EmployeeEntity">
+            <column name="Employee_ssn"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,4 +1,4 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -7,9 +7,8 @@ import java.io.Serializable;
 public class ApplicantAppliesForPropertyEntityPK implements Serializable {
     private int applicantSsn;
     private int propertyPropertyId;
-    private int propertyTennantSsn;
 
-    @Column(name = "Applicant_ssn")
+    @Column(name = "Applicant_ssn", nullable = false)
     @Id
     public int getApplicantSsn() {
         return applicantSsn;
@@ -19,7 +18,7 @@ public class ApplicantAppliesForPropertyEntityPK implements Serializable {
         this.applicantSsn = applicantSsn;
     }
 
-    @Column(name = "Property_propertyID")
+    @Column(name = "Property_propertyID", nullable = false)
     @Id
     public int getPropertyPropertyId() {
         return propertyPropertyId;
@@ -27,16 +26,6 @@ public class ApplicantAppliesForPropertyEntityPK implements Serializable {
 
     public void setPropertyPropertyId(int propertyPropertyId) {
         this.propertyPropertyId = propertyPropertyId;
-    }
-
-    @Column(name = "Property_Tennant_ssn")
-    @Id
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
-    }
-
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
     }
 
     @Override
@@ -48,7 +37,6 @@ public class ApplicantAppliesForPropertyEntityPK implements Serializable {
 
         if (applicantSsn != that.applicantSsn) return false;
         if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
 
         return true;
     }
@@ -57,7 +45,6 @@ public class ApplicantAppliesForPropertyEntityPK implements Serializable {
     public int hashCode() {
         int result = applicantSsn;
         result = 31 * result + propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
         return result;
     }
 }

@@ -1,4 +1,4 @@
-package entities;
+package RealEstate;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -6,10 +6,9 @@ import java.io.Serializable;
 
 public class EmployeeWorksAtPropertyEntityPK implements Serializable {
     private int propertyPropertyId;
-    private int propertyTennantSsn;
     private int employeeSsn;
 
-    @Column(name = "Property_propertyID")
+    @Column(name = "Property_propertyID", nullable = false)
     @Id
     public int getPropertyPropertyId() {
         return propertyPropertyId;
@@ -19,17 +18,7 @@ public class EmployeeWorksAtPropertyEntityPK implements Serializable {
         this.propertyPropertyId = propertyPropertyId;
     }
 
-    @Column(name = "Property_Tennant_ssn")
-    @Id
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
-    }
-
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
-    }
-
-    @Column(name = "Employee_ssn")
+    @Column(name = "Employee_ssn", nullable = false)
     @Id
     public int getEmployeeSsn() {
         return employeeSsn;
@@ -47,7 +36,6 @@ public class EmployeeWorksAtPropertyEntityPK implements Serializable {
         EmployeeWorksAtPropertyEntityPK that = (EmployeeWorksAtPropertyEntityPK) o;
 
         if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
         if (employeeSsn != that.employeeSsn) return false;
 
         return true;
@@ -56,7 +44,6 @@ public class EmployeeWorksAtPropertyEntityPK implements Serializable {
     @Override
     public int hashCode() {
         int result = propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
         result = 31 * result + employeeSsn;
         return result;
     }
