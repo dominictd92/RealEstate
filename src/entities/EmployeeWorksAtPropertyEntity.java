@@ -1,6 +1,7 @@
-package RealEstate;
+package entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Employee_Works_At_Property", schema = "RealEstate", catalog = "")
@@ -8,6 +9,7 @@ import javax.persistence.*;
 public class EmployeeWorksAtPropertyEntity {
     private int propertyPropertyId;
     private int employeeSsn;
+    private Collection<PropertyEntity> propertyByPropertyId;
     private EmployeeEntity employeeByEmployeeSsn;
 
     @Id
@@ -48,6 +50,15 @@ public class EmployeeWorksAtPropertyEntity {
         int result = propertyPropertyId;
         result = 31 * result + employeeSsn;
         return result;
+    }
+
+    @OneToMany(mappedBy = "employeeWorksAtPropertyByPropertyId")
+    public Collection<PropertyEntity> getPropertyByPropertyId() {
+        return propertyByPropertyId;
+    }
+
+    public void setPropertyByPropertyId(Collection<PropertyEntity> propertyByPropertyId) {
+        this.propertyByPropertyId = propertyByPropertyId;
     }
 
     @ManyToOne

@@ -4,8 +4,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="RealEstate.PropertyEntity" table="Property" schema="RealEstate">
-        <composite-id mapped="true" class="RealEstate.PropertyEntityPK">
+    <class name="entities.PropertyEntity" table="Property" schema="RealEstate">
+        <composite-id mapped="true" class="entities.PropertyEntityPK">
             <key-property name="propertyId">
                 <column name="propertyID" sql-type="int(11)"/>
             </key-property>
@@ -58,26 +58,25 @@
         <property name="numOfTennants">
             <column name="numOfTennants" sql-type="int(11)" not-null="true"/>
         </property>
-        <many-to-one name="applicantAppliesForPropertyByPropertyId"
-                     class="RealEstate.ApplicantAppliesForPropertyEntity">
+        <many-to-one name="applicantAppliesForPropertyByPropertyId" class="entities.ApplicantAppliesForPropertyEntity">
             <column name="propertyID"/>
         </many-to-one>
-        <many-to-one name="employeeWorksAtPropertyByPropertyId" class="RealEstate.EmployeeWorksAtPropertyEntity">
+        <many-to-one name="employeeWorksAtPropertyByPropertyId" class="entities.EmployeeWorksAtPropertyEntity">
             <column name="propertyID"/>
         </many-to-one>
-        <many-to-one name="tennantByTennantSsn" class="RealEstate.TennantEntity">
+        <many-to-one name="tennantByTennantSsn" class="entities.TennantEntity">
             <column name="Tennant_ssn"/>
         </many-to-one>
-        <many-to-one name="propertyNeedsRepairByPropertyId" class="RealEstate.PropertyNeedsRepairEntity">
+        <many-to-one name="propertyNeedsRepairByPropertyId" class="entities.PropertyNeedsRepairEntity">
             <column name="propertyID"/>
         </many-to-one>
-        <many-to-one name="propertyHasAmenityByPropertyId" class="RealEstate.PropertyHasAmenityEntity">
+        <many-to-one name="propertyHasAmenityByPropertyId" class="entities.PropertyHasAmenityEntity">
             <column name="propertyID"/>
         </many-to-one>
-        <many-to-one name="propertyHasExpenseByPropertyId" class="RealEstate.PropertyHasExpenseEntity">
+        <many-to-one name="propertyHasExpenseByPropertyId" class="entities.PropertyHasExpenseEntity">
             <column name="propertyID"/>
         </many-to-one>
-        <many-to-one name="sellerSellsPropertyByPropertyId" class="RealEstate.SellerSellsPropertyEntity">
+        <many-to-one name="sellerSellsPropertyByPropertyId" class="entities.SellerSellsPropertyEntity">
             <column name="propertyID"/>
         </many-to-one>
     </class>

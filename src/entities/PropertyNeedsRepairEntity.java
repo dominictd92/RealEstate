@@ -1,6 +1,7 @@
-package RealEstate;
+package entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Property_Needs_Repair", schema = "RealEstate", catalog = "")
@@ -9,6 +10,7 @@ public class PropertyNeedsRepairEntity {
     private int propertyPropertyId;
     private int propertyRepairId;
     private RepairEntity repairByRepairRepairId;
+    private Collection<PropertyEntity> propertyByPropertyId;
 
     @Basic
     @Column(name = "Repair_repairId", nullable = true)
@@ -71,5 +73,14 @@ public class PropertyNeedsRepairEntity {
 
     public void setRepairByRepairRepairId(RepairEntity repairByRepairRepairId) {
         this.repairByRepairRepairId = repairByRepairRepairId;
+    }
+
+    @OneToMany(mappedBy = "propertyNeedsRepairByPropertyId")
+    public Collection<PropertyEntity> getPropertyByPropertyId() {
+        return propertyByPropertyId;
+    }
+
+    public void setPropertyByPropertyId(Collection<PropertyEntity> propertyByPropertyId) {
+        this.propertyByPropertyId = propertyByPropertyId;
     }
 }

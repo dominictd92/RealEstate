@@ -4,16 +4,16 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="RealEstate.DependentLivesWithTennantEntity" table="Dependent_lives_with_Tennant" schema="RealEstate">
+    <class name="entities.DependentLivesWithTennantEntity" table="Dependent_lives_with_Tennant" schema="RealEstate">
         <id name="tennantSsn">
             <column name="Tennant_ssn" sql-type="int(11)"/>
         </id>
         <property name="dependentDepId">
             <column name="Dependent_depId" sql-type="int(11)" not-null="true"/>
         </property>
-        <many-to-one name="dependentByDependentDepId" class="RealEstate.DependentEntity">
+        <many-to-one name="dependentByDependentDepId" class="entities.DependentEntity">
             <column name="Dependent_depId" not-null="true"/>
         </many-to-one>
-        <one-to-one name="tennantByTennantSsn" class="RealEstate.TennantEntity"/>
+        <one-to-one name="tennantByTennantSsn" class="entities.TennantEntity"/>
     </class>
 </hibernate-mapping>

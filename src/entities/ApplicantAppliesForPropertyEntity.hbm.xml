@@ -4,9 +4,9 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="RealEstate.ApplicantAppliesForPropertyEntity" table="Applicant_Applies_For_Property"
+    <class name="entities.ApplicantAppliesForPropertyEntity" table="Applicant_Applies_For_Property"
            schema="RealEstate">
-        <composite-id mapped="true" class="RealEstate.ApplicantAppliesForPropertyEntityPK">
+        <composite-id mapped="true" class="entities.ApplicantAppliesForPropertyEntityPK">
             <key-property name="applicantSsn">
                 <column name="Applicant_ssn" sql-type="int(11)"/>
             </key-property>
@@ -17,8 +17,14 @@
         <property name="applicationStatus">
             <column name="applicationStatus" sql-type="varchar(45)" length="45" not-null="true"/>
         </property>
-        <many-to-one name="applicantByApplicantSsn" class="RealEstate.ApplicantEntity">
+        <many-to-one name="applicantByApplicantSsn" class="entities.ApplicantEntity">
             <column name="Applicant_ssn"/>
         </many-to-one>
+        <set name="applicantByAppliacntId" inverse="true">
+            <key>
+                <column name="propertyID"/>
+            </key>
+            <one-to-many not-found="ignore" class="entities.PropertyEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

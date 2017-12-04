@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="RealEstate.TennantEntity" table="Tennant" schema="RealEstate">
+    <class name="entities.TennantEntity" table="Tennant" schema="RealEstate">
         <id name="ssn">
             <column name="ssn" sql-type="int(11)"/>
         </id>
@@ -38,12 +38,12 @@
         <property name="leaseEndDate">
             <column name="leaseEndDate" sql-type="datetime" not-null="true"/>
         </property>
-        <one-to-one name="dependentLivesWithTennantBySsn" class="RealEstate.DependentLivesWithTennantEntity"/>
+        <one-to-one name="dependentLivesWithTennantBySsn" class="entities.DependentLivesWithTennantEntity"/>
         <set name="propertiesBySsn" inverse="true">
             <key>
                 <column name="Tennant_ssn"/>
             </key>
-            <one-to-many not-found="ignore" class="RealEstate.PropertyEntity"/>
+            <one-to-many not-found="ignore" class="entities.PropertyEntity"/>
         </set>
     </class>
 </hibernate-mapping>

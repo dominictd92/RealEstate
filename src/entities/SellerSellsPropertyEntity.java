@@ -1,7 +1,8 @@
-package RealEstate;
+package entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Seller_Sells_Property", schema = "RealEstate", catalog = "")
@@ -11,6 +12,7 @@ public class SellerSellsPropertyEntity {
     private int propertyPropertyId;
     private BigDecimal price;
     private SellerEntity sellerBySellerSsn;
+    private Collection<PropertyEntity> propertyByPropertyId;
 
     @Id
     @Column(name = "Seller_ssn", nullable = false)
@@ -72,5 +74,14 @@ public class SellerSellsPropertyEntity {
 
     public void setSellerBySellerSsn(SellerEntity sellerBySellerSsn) {
         this.sellerBySellerSsn = sellerBySellerSsn;
+    }
+
+    @OneToMany(mappedBy = "sellerSellsPropertyByPropertyId")
+    public Collection<PropertyEntity> getPropertyByPropertyId() {
+        return propertyByPropertyId;
+    }
+
+    public void setPropertyByPropertyId(Collection<PropertyEntity> propertyByPropertyId) {
+        this.propertyByPropertyId = propertyByPropertyId;
     }
 }

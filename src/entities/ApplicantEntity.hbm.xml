@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="RealEstate.ApplicantEntity" table="Applicant" schema="RealEstate">
+    <class name="entities.ApplicantEntity" table="Applicant" schema="RealEstate">
         <id name="ssn">
             <column name="ssn" sql-type="int(11)"/>
         </id>
@@ -42,7 +42,7 @@
             <key>
                 <column name="Applicant_ssn"/>
             </key>
-            <one-to-many not-found="ignore" class="RealEstate.ApplicantAppliesForPropertyEntity"/>
+            <one-to-many not-found="ignore" class="entities.ApplicantAppliesForPropertyEntity"/>
         </set>
     </class>
 </hibernate-mapping>

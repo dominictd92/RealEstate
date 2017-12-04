@@ -1,4 +1,4 @@
-package RealEstate;
+package entities;
 
 import javax.persistence.*;
 

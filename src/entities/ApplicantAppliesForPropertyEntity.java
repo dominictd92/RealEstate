@@ -1,6 +1,7 @@
-package RealEstate;
+package entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Applicant_Applies_For_Property", schema = "RealEstate", catalog = "")
@@ -10,6 +11,7 @@ public class ApplicantAppliesForPropertyEntity {
     private int propertyPropertyId;
     private String applicationStatus;
     private ApplicantEntity applicantByApplicantSsn;
+    private Collection<PropertyEntity> applicantByAppliacntId;
 
     @Id
     @Column(name = "Applicant_ssn", nullable = false)
@@ -72,5 +74,14 @@ public class ApplicantAppliesForPropertyEntity {
 
     public void setApplicantByApplicantSsn(ApplicantEntity applicantByApplicantSsn) {
         this.applicantByApplicantSsn = applicantByApplicantSsn;
+    }
+
+    @OneToMany(mappedBy = "applicantAppliesForPropertyByPropertyId")
+    public Collection<PropertyEntity> getApplicantByAppliacntId() {
+        return applicantByAppliacntId;
+    }
+
+    public void setApplicantByAppliacntId(Collection<PropertyEntity> applicantByAppliacntId) {
+        this.applicantByAppliacntId = applicantByAppliacntId;
     }
 }

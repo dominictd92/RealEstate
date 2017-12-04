@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="RealEstate.PropertyHasAmenityEntity" table="Property_has_Amenity" schema="RealEstate">
+    <class name="entities.PropertyHasAmenityEntity" table="Property_has_Amenity" schema="RealEstate">
         <id name="porportyAmenityid">
             <column name="Porporty_amenityid" sql-type="int(11)"/>
         </id>
@@ -14,8 +14,14 @@
         <property name="propertyPropertyId">
             <column name="Property_propertyID" sql-type="int(11)"/>
         </property>
-        <many-to-one name="amenityByAmenityAmenityid" class="RealEstate.AmenityEntity">
+        <many-to-one name="amenityByAmenityAmenityid" class="entities.AmenityEntity">
             <column name="Amenity_amenityid"/>
         </many-to-one>
+        <set name="propertyByPropertyId" inverse="true">
+            <key>
+                <column name="propertyID"/>
+            </key>
+            <one-to-many not-found="ignore" class="entities.PropertyEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

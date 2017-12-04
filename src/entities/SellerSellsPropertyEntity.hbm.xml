@@ -4,8 +4,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="RealEstate.SellerSellsPropertyEntity" table="Seller_Sells_Property" schema="RealEstate">
-        <composite-id mapped="true" class="RealEstate.SellerSellsPropertyEntityPK">
+    <class name="entities.SellerSellsPropertyEntity" table="Seller_Sells_Property" schema="RealEstate">
+        <composite-id mapped="true" class="entities.SellerSellsPropertyEntityPK">
             <key-property name="sellerSsn">
                 <column name="Seller_ssn" sql-type="int(11)"/>
             </key-property>
@@ -16,8 +16,14 @@
         <property name="price">
             <column name="price" sql-type="decimal(13,2)" precision="13" scale="2" not-null="true"/>
         </property>
-        <many-to-one name="sellerBySellerSsn" class="RealEstate.SellerEntity">
+        <many-to-one name="sellerBySellerSsn" class="entities.SellerEntity">
             <column name="Seller_ssn"/>
         </many-to-one>
+        <set name="propertyByPropertyId" inverse="true">
+            <key>
+                <column name="propertyID"/>
+            </key>
+            <one-to-many not-found="ignore" class="entities.PropertyEntity"/>
+        </set>
     </class>
 </hibernate-mapping>
