@@ -1,9 +1,9 @@
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('123456789', '1', '123456789', '500000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('223456789', '2', '223456789', '600000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('323456789', '3', '323456789', '700000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('423456789', '4', '423456789', '800000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('523456789', '5', '523456789', '900000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('623456789', '6', '623456789', '1000000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('723456789', '7', '723456789', '900000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('823456789', '8', '823456789', '800000');
-INSERT INTO `RealEstate`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`, `Property_Tennant_ssn`, `price`) VALUES ('923456789', '9', '923456789', '700000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('123456789', '1',  '500000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('223456789', '2',  '600000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('323456789', '3',  '700000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('423456789', '4',  '800000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('523456789', '5',  '900000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('623456789', '6',  '1000000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('723456789', '7',  '900000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('823456789', '8',  '800000');
+INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('923456789', '9',  '700000');
