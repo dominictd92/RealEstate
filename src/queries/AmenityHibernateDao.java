@@ -14,7 +14,7 @@ import utilities.DATABASE_CONSTANTS;
 
 /**
  * This holds all of the sql statements that are needed 
- * for the Properties page
+ * for the Amenity page
  */
 public class AmenityHibernateDao {
     public static final String SELECT_AMENITIES = "SELECT * FROM Amenity";
