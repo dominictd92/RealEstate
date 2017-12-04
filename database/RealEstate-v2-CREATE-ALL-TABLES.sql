@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Amenity` (
   `amenityid` INT(11) NOT NULL,
   `amenity` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`amenityid`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Applicant` (
   `salary` VARCHAR(45) NULL DEFAULT NULL,
   `f_name` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`ssn`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -67,8 +67,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Tennant` (
   `rent` DECIMAL(13,2) NULL DEFAULT NULL,
   `leaseEndDate` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`ssn`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -95,12 +95,12 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Property` (
   PRIMARY KEY (`propertyID`, `Tennant_ssn`),
   INDEX `fk_Property_Tennant_idx` (`Tennant_ssn` ASC),
   CONSTRAINT `fk_Property_Tennant`
-  FOREIGN KEY (`Tennant_ssn`)
-  REFERENCES `RealEstate`.`Tennant` (`ssn`)
+    FOREIGN KEY (`Tennant_ssn`)
+    REFERENCES `RealEstate`.`Tennant` (`ssn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -114,17 +114,17 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Applicant_Applies_For_Property` (
   INDEX `fk_Applicant_has_Property_Applicant1_idx` (`Applicant_ssn` ASC),
   INDEX `fk_Applicant_has_Property_Property1_idx` (`Property_propertyID` ASC),
   CONSTRAINT `fk_Applicant_has_Property_Applicant1`
-  FOREIGN KEY (`Applicant_ssn`)
-  REFERENCES `RealEstate`.`Applicant` (`ssn`)
+    FOREIGN KEY (`Applicant_ssn`)
+    REFERENCES `RealEstate`.`Applicant` (`ssn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Applicant_has_Property_Property1`
-  FOREIGN KEY (`Property_propertyID`)
-  REFERENCES `RealEstate`.`Property` (`propertyID`)
+    FOREIGN KEY (`Property_propertyID`)
+    REFERENCES `RealEstate`.`Property` (`propertyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -137,8 +137,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Dependent` (
   `l_name` VARCHAR(45) NULL DEFAULT NULL,
   `birthDate` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`depId`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -151,17 +151,17 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Dependent_lives_with_Tennant` (
   INDEX `fk_Dependent_has_Tennant_Tennant1_idx` (`Tennant_ssn` ASC),
   INDEX `fk_Dependent_has_Tennant_Dependent1_idx` (`Dependent_depId` ASC),
   CONSTRAINT `fk_Dependent_has_Tennant_Dependent1`
-  FOREIGN KEY (`Dependent_depId`)
-  REFERENCES `RealEstate`.`Dependent` (`depId`)
+    FOREIGN KEY (`Dependent_depId`)
+    REFERENCES `RealEstate`.`Dependent` (`depId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Dependent_has_Tennant_Tennant1`
-  FOREIGN KEY (`Tennant_ssn`)
-  REFERENCES `RealEstate`.`Tennant` (`ssn`)
+    FOREIGN KEY (`Tennant_ssn`)
+    REFERENCES `RealEstate`.`Tennant` (`ssn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -175,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Employee` (
   `pay` DECIMAL(13,2) NULL DEFAULT NULL,
   `phoneNumber` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`ssn`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -189,17 +189,17 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Employee_Works_At_Property` (
   INDEX `fk_Property_has_Employee_Employee1_idx` (`Employee_ssn` ASC),
   INDEX `fk_Property_has_Employee_Property1_idx` (`Property_propertyID` ASC),
   CONSTRAINT `fk_Property_has_Employee_Employee1`
-  FOREIGN KEY (`Employee_ssn`)
-  REFERENCES `RealEstate`.`Employee` (`ssn`)
+    FOREIGN KEY (`Employee_ssn`)
+    REFERENCES `RealEstate`.`Employee` (`ssn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Property_has_Employee_Property1`
-  FOREIGN KEY (`Property_propertyID`)
-  REFERENCES `RealEstate`.`Property` (`propertyID`)
+    FOREIGN KEY (`Property_propertyID`)
+    REFERENCES `RealEstate`.`Property` (`propertyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -210,8 +210,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Expense` (
   `cost` DECIMAL(13,2) NULL DEFAULT NULL,
   `expense` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`expenseId`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -223,8 +223,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Repair` (
   `effectedArea` VARCHAR(45) NULL DEFAULT NULL,
   `vendor` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`repairId`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -238,17 +238,17 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Property_Needs_Repair` (
   INDEX `fk_Repair_has_Property_Property1` (`Property_propertyID` ASC),
   INDEX `fk_Repair_has_Repair_Repair1` (`Repair_repairId` ASC),
   CONSTRAINT `fk_Repair_has_Property_Property1`
-  FOREIGN KEY (`Property_propertyID`)
-  REFERENCES `RealEstate`.`Property` (`propertyID`)
+    FOREIGN KEY (`Property_propertyID`)
+    REFERENCES `RealEstate`.`Property` (`propertyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Repair_has_Repair_Repair1`
-  FOREIGN KEY (`Repair_repairId`)
-  REFERENCES `RealEstate`.`Repair` (`repairId`)
+    FOREIGN KEY (`Repair_repairId`)
+    REFERENCES `RealEstate`.`Repair` (`repairId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -262,17 +262,17 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Property_has_Amenity` (
   INDEX `fk_Amenity_has_Property_Property1_idx` (`Property_propertyID` ASC, `Porporty_amenityid` ASC),
   INDEX `Property_Amenity_Has_Amenity_idx` (`Amenity_amenityid` ASC),
   CONSTRAINT `Property_Amenity_Has_Amenity`
-  FOREIGN KEY (`Amenity_amenityid`)
-  REFERENCES `RealEstate`.`Amenity` (`amenityid`)
+    FOREIGN KEY (`Amenity_amenityid`)
+    REFERENCES `RealEstate`.`Amenity` (`amenityid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Property_Amenity_Has_Property`
-  FOREIGN KEY (`Property_propertyID`)
-  REFERENCES `RealEstate`.`Property` (`propertyID`)
+    FOREIGN KEY (`Property_propertyID`)
+    REFERENCES `RealEstate`.`Property` (`propertyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -286,17 +286,17 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Property_has_Expense` (
   INDEX `fk_Expense_has_Property_Expense1_idx` (`Expense_expenseId` ASC),
   INDEX `Property_Expense_Has_Property_idx` (`Property_propertyID` ASC),
   CONSTRAINT `Property_Expense_Has_Expense`
-  FOREIGN KEY (`Expense_expenseId`)
-  REFERENCES `RealEstate`.`Expense` (`expenseId`)
+    FOREIGN KEY (`Expense_expenseId`)
+    REFERENCES `RealEstate`.`Expense` (`expenseId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Property_Expense_Has_Property`
-  FOREIGN KEY (`Property_propertyID`)
-  REFERENCES `RealEstate`.`Property` (`propertyID`)
+    FOREIGN KEY (`Property_propertyID`)
+    REFERENCES `RealEstate`.`Property` (`propertyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -313,8 +313,8 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Seller` (
   `m_name` VARCHAR(45) NULL DEFAULT NULL,
   `l_name` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`ssn`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -328,17 +328,17 @@ CREATE TABLE IF NOT EXISTS `RealEstate`.`Seller_Sells_Property` (
   INDEX `fk_Seller_has_Property_Seller1_idx` (`Seller_ssn` ASC),
   INDEX `fk_Seller_has_Property_Property1_idx` (`Property_propertyID` ASC),
   CONSTRAINT `fk_Seller_has_Property_Property1`
-  FOREIGN KEY (`Property_propertyID`)
-  REFERENCES `RealEstate`.`Property` (`propertyID`)
+    FOREIGN KEY (`Property_propertyID`)
+    REFERENCES `RealEstate`.`Property` (`propertyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Seller_has_Property_Seller1`
-  FOREIGN KEY (`Seller_ssn`)
-  REFERENCES `RealEstate`.`Seller` (`ssn`)
+    FOREIGN KEY (`Seller_ssn`)
+    REFERENCES `RealEstate`.`Seller` (`ssn`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = latin1;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
