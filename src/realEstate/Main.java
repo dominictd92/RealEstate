@@ -48,7 +48,7 @@ public class Main {
         tabbedPane.addTab("Applicants", Applicants.createApplicantsPane());
         tabbedPane.addTab("Repairs", createRepairsPane());
         tabbedPane.addTab("Employees", Employees.createEmployeesPane());
-        
+        tabbedPane.addTab("Sellers", Seller.createSellersPane());
         pane.add(tabbedPane, BorderLayout.CENTER);
     }
 

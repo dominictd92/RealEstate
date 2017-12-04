@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/domin/Documents/Repositories/RealEstate/src/realEstate/Employees.java</file>
             <file>file:/C:/Users/domin/Documents/Repositories/RealEstate/src/realEstate/Seller.java</file>
-            <file>file:/C:/Users/domin/Documents/Repositories/RealEstate/src/realEstate/Applicants.java</file>
-            <file>file:/C:/Users/domin/Documents/Repositories/RealEstate/src/entities/EmployeeEntity.java</file>
-            <file>file:/C:/Users/domin/Documents/Repositories/RealEstate/src/queries/EmployeeHibernateDao.java</file>
+            <file>file:/C:/Users/domin/Documents/Repositories/RealEstate/src/realEstate/Main.java</file>
+            <file>file:/C:/Users/domin/Documents/Repositories/RealEstate/src/queries/SellerHibernateDao.java</file>
         </group>
     </open-files>
 </project-private>
