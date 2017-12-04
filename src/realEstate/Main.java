@@ -17,7 +17,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import realEstate.property.Property2;
 
 import utilities.APP_CONSTANTS;
 
@@ -41,7 +40,7 @@ public class Main {
 //    }
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
-        Property2 properties = new Property2();
+        Properties properties = new Properties();
         //create all of the pages in the form or tabs
         tabbedPane.addTab("Home", Home.createHomePane());
         tabbedPane.addTab("Properties", properties.returnJPanel());
