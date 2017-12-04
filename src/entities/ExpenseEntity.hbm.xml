@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entities.ExpenseEntity" table="Expense" schema="RealEstate">
+        <id name="expenseId">
+            <column name="expenseId" sql-type="int(11)"/>
+        </id>
+        <property name="cost">
+            <column name="cost" sql-type="decimal(13,2)" precision="13" scale="2" not-null="true"/>
+        </property>
+        <property name="expense">
+            <column name="expense" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <set name="propertyHasExpensesByExpenseId" inverse="true">
+            <key>
+                <column name="Expense_expenseId" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="entities.PropertyHasExpenseEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,50 +1,26 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Applicant", schema = "RealEstate", catalog = "")
 public class ApplicantEntity {
-    @Id
-    @Column(name = "ssn")
     private int ssn;
-    @Basic
-    @Column(name = "l_name")
     private String lName;
-    @Basic
-    @Column(name = "m_name")
     private String mName;
-    @Basic
-    @Column(name = "creditScore")
     private String creditScore;
-    @Basic
-    @Column(name = "address")
     private String address;
-    @Basic
-    @Column(name = "moveDate")
     private String moveDate;
-    @Basic
-    @Column(name = "phoneNumber")
     private String phoneNumber;
-    @Basic
-    @Column(name = "employer")
     private String employer;
-    @Basic
-    @Column(name = "jobTitle")
     private String jobTitle;
-    @Basic
-    @Column(name = "salary")
     private String salary;
-    @Basic
-    @Column(name = "f_name")
     private String fName;
-    
-    @Transient
-    private String applicationStatus;
-    
-    @Transient
-    private Integer propertyId;
+    private Collection<ApplicantAppliesForPropertyEntity> applicantAppliesForPropertiesBySsn;
 
+    @Id
+    @Column(name = "ssn", nullable = false)
     public int getSsn() {
         return ssn;
     }
@@ -53,6 +29,8 @@ public class ApplicantEntity {
         this.ssn = ssn;
     }
 
+    @Basic
+    @Column(name = "l_name", nullable = true, length = 45)
     public String getlName() {
         return lName;
     }
@@ -61,6 +39,8 @@ public class ApplicantEntity {
         this.lName = lName;
     }
 
+    @Basic
+    @Column(name = "m_name", nullable = true, length = 45)
     public String getmName() {
         return mName;
     }
@@ -69,6 +49,8 @@ public class ApplicantEntity {
         this.mName = mName;
     }
 
+    @Basic
+    @Column(name = "creditScore", nullable = true, length = 45)
     public String getCreditScore() {
         return creditScore;
     }
@@ -77,6 +59,8 @@ public class ApplicantEntity {
         this.creditScore = creditScore;
     }
 
+    @Basic
+    @Column(name = "address", nullable = true, length = 45)
     public String getAddress() {
         return address;
     }
@@ -85,6 +69,8 @@ public class ApplicantEntity {
         this.address = address;
     }
 
+    @Basic
+    @Column(name = "moveDate", nullable = true, length = 45)
     public String getMoveDate() {
         return moveDate;
     }
@@ -93,6 +79,8 @@ public class ApplicantEntity {
         this.moveDate = moveDate;
     }
 
+    @Basic
+    @Column(name = "phoneNumber", nullable = true, length = 45)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -101,6 +89,8 @@ public class ApplicantEntity {
         this.phoneNumber = phoneNumber;
     }
 
+    @Basic
+    @Column(name = "employer", nullable = true, length = 45)
     public String getEmployer() {
         return employer;
     }
@@ -109,6 +99,8 @@ public class ApplicantEntity {
         this.employer = employer;
     }
 
+    @Basic
+    @Column(name = "jobTitle", nullable = true, length = 45)
     public String getJobTitle() {
         return jobTitle;
     }
@@ -117,6 +109,8 @@ public class ApplicantEntity {
         this.jobTitle = jobTitle;
     }
 
+    @Basic
+    @Column(name = "salary", nullable = true, length = 45)
     public String getSalary() {
         return salary;
     }
@@ -125,6 +119,8 @@ public class ApplicantEntity {
         this.salary = salary;
     }
 
+    @Basic
+    @Column(name = "f_name", nullable = true, length = 45)
     public String getfName() {
         return fName;
     }
@@ -132,42 +128,7 @@ public class ApplicantEntity {
     public void setfName(String fName) {
         this.fName = fName;
     }
-    
-    public String getApplicationStatus() { 
-        return applicationStatus;
-    }
-            
-    public void setApplicationStatus(String applicationStatus) {
-        this.applicationStatus = applicationStatus;
-    }
-    
-    public Integer getPropertyId() { 
-        return propertyId;
-    }
-    
-    public void setPropertyId(Integer propertyId) {
-        this.propertyId = propertyId;
-    }
-    
-    public ApplicantEntity() { 
-        //null
-    }
-    
-    public ApplicantEntity(Integer ssn, String fName, String mName, String lName, String address, String phoneNumber,
-            String creditScore, String moveDate, String employer, String job, String salary) { 
-        this.ssn = ssn;
-        this.fName = fName;
-        this.mName = mName;
-        this.lName = lName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.creditScore = creditScore;
-        this.moveDate = moveDate;
-        this.employer = employer; 
-        this.jobTitle = job;
-        this.salary = salary;
-    }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -205,21 +166,13 @@ public class ApplicantEntity {
         result = 31 * result + (fName != null ? fName.hashCode() : 0);
         return result;
     }
-    
-    public Object[] getColumnArray() {
-        String[] columns = new String[] {
-            "SSN", "First Name", "Middle Name", "Last Name", "Address", "Phone Number",
-            "Move Date", "Credit Score", "Employer", "Job Title", "Salary", "Application Status", "PropertyID"
-        };
-        return columns; 
+
+    @OneToMany(mappedBy = "applicantByApplicantSsn")
+    public Collection<ApplicantAppliesForPropertyEntity> getApplicantAppliesForPropertiesBySsn() {
+        return applicantAppliesForPropertiesBySsn;
     }
-    
-    public Object[] getApplicantArray() { 
-        Object[] rows = new Object[] {
-            this.ssn, this.fName, this.mName, this.lName,
-            this.address, this.phoneNumber, this.moveDate, this.creditScore,
-            this.employer, this.jobTitle, this.salary, this.applicationStatus, this.propertyId
-        };
-        return rows;
+
+    public void setApplicantAppliesForPropertiesBySsn(Collection<ApplicantAppliesForPropertyEntity> applicantAppliesForPropertiesBySsn) {
+        this.applicantAppliesForPropertiesBySsn = applicantAppliesForPropertiesBySsn;
     }
 }

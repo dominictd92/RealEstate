@@ -1,18 +1,29 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Property_has_Amenity", schema = "RealEstate", catalog = "")
-@IdClass(PropertyHasAmenityEntityPK.class)
 public class PropertyHasAmenityEntity {
+    private int amenityAmenityid;
     private int propertyPropertyId;
-    private int propertyTennantSsn;
+    private int porportyAmenityid;
     private AmenityEntity amenityByAmenityAmenityid;
-    private PropertyEntity property;
+    private Collection<PropertyEntity> propertyByPropertyId;
 
-    @Id
-    @Column(name = "Property_propertyID")
+    @Basic
+    @Column(name = "Amenity_amenityid", nullable = false)
+    public int getAmenityAmenityid() {
+        return amenityAmenityid;
+    }
+
+    public void setAmenityAmenityid(int amenityAmenityid) {
+        this.amenityAmenityid = amenityAmenityid;
+    }
+
+    @Basic
+    @Column(name = "Property_propertyID", nullable = false)
     public int getPropertyPropertyId() {
         return propertyPropertyId;
     }
@@ -22,13 +33,13 @@ public class PropertyHasAmenityEntity {
     }
 
     @Id
-    @Column(name = "Property_Tennant_ssn")
-    public int getPropertyTennantSsn() {
-        return propertyTennantSsn;
+    @Column(name = "Porporty_amenityid", nullable = false)
+    public int getPorportyAmenityid() {
+        return porportyAmenityid;
     }
 
-    public void setPropertyTennantSsn(int propertyTennantSsn) {
-        this.propertyTennantSsn = propertyTennantSsn;
+    public void setPorportyAmenityid(int porportyAmenityid) {
+        this.porportyAmenityid = porportyAmenityid;
     }
 
     @Override
@@ -38,21 +49,23 @@ public class PropertyHasAmenityEntity {
 
         PropertyHasAmenityEntity that = (PropertyHasAmenityEntity) o;
 
+        if (amenityAmenityid != that.amenityAmenityid) return false;
         if (propertyPropertyId != that.propertyPropertyId) return false;
-        if (propertyTennantSsn != that.propertyTennantSsn) return false;
+        if (porportyAmenityid != that.porportyAmenityid) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = propertyPropertyId;
-        result = 31 * result + propertyTennantSsn;
+        int result = amenityAmenityid;
+        result = 31 * result + propertyPropertyId;
+        result = 31 * result + porportyAmenityid;
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Amenity_amenityid", referencedColumnName = "amenityid")
+    @JoinColumn(name = "Amenity_amenityid", referencedColumnName = "amenityid", nullable = false)
     public AmenityEntity getAmenityByAmenityAmenityid() {
         return amenityByAmenityAmenityid;
     }
@@ -61,13 +74,12 @@ public class PropertyHasAmenityEntity {
         this.amenityByAmenityAmenityid = amenityByAmenityAmenityid;
     }
 
-    @OneToOne
-    @JoinColumns({@JoinColumn(name = "Property_propertyID", referencedColumnName = "propertyID", nullable = false), @JoinColumn(name = "Property_Tennant_ssn", referencedColumnName = "Tennant_ssn", nullable = false)})
-    public PropertyEntity getProperty() {
-        return property;
+    @OneToMany(mappedBy = "propertyHasAmenityByPropertyId")
+    public Collection<PropertyEntity> getPropertyByPropertyId() {
+        return propertyByPropertyId;
     }
 
-    public void setProperty(PropertyEntity property) {
-        this.property = property;
+    public void setPropertyByPropertyId(Collection<PropertyEntity> propertyByPropertyId) {
+        this.propertyByPropertyId = propertyByPropertyId;
     }
 }
