@@ -60,7 +60,7 @@ public class SellerHibernateDao {
             int i = 1;
             
             pst.setInt(i++, seller.getZipCode());
-            pst.setInt(i++, seller.getStreetAddress());
+            pst.setString(i++, seller.getStreetAddress());
             pst.setString(i++, seller.getCity());
             pst.setString(i++, seller.getState());
             pst.setString (i++, seller.getPhoneNumber());
@@ -104,7 +104,7 @@ public class SellerHibernateDao {
             
             int i = 1;
             pst.setInt(i++, seller.getZipCode());
-            pst.setInt(i++, seller.getStreetAddress());
+            pst.setString(i++, seller.getStreetAddress());
             pst.setString(i++, seller.getCity());
             pst.setString(i++, seller.getState());
             pst.setString (i++, seller.getPhoneNumber());
