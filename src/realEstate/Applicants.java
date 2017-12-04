@@ -141,7 +141,7 @@ public class Applicants {
                     creditField.getText(), moveField.getText(), employerField.getText(), 
                     jobField.getText(), salaryField.getText()); 
                 applicant.setApplicationStatus(statusList.getSelectedItem().toString());
-                applicant.setPropertyId(StringUtils.isEmpty(propertyList.getSelectedItem().toString()) ? 
+                applicant.setPropertyID(StringUtils.isEmpty(propertyList.getSelectedItem().toString()) ? 
                     -1 : Integer.parseInt(propertyList.getSelectedItem().toString()));
               
                 List<ApplicantEntity> results = dao.getFilteredApplications(applicant);
@@ -188,7 +188,7 @@ public class Applicants {
                 APPLICANTS_CONSTANTS.DROPDOWN_WIDTH, APPLICANTS_CONSTANTS.DROPDOWN_HEIGHT);
             List<ApplicantEntity> applicants = dao.getAllApplications();
             for (ApplicantEntity applicant : applicants) {
-                applicantDropdown.addItem(applicant.getSsn() + "; " + applicant.getPropertyId());
+                applicantDropdown.addItem(applicant.getSsn() + "; " + applicant.getPropertyID());
             }
             selectApplicant.add(applicantDropdown);
             
@@ -209,7 +209,7 @@ public class Applicants {
                 getPropertyLabelsAndDropdown(d);
                 //set the fields based on their selection
                 for (ApplicantEntity applicant : applicants) {
-                    if (applicant.getSsn() == applicantSsn && applicant.getPropertyId().equals(propertyId)) {
+                    if (applicant.getSsn() == applicantSsn && applicant.getPropertyID().equals(propertyId)) {
                         fNameField.setText(applicant.getfName()); 
                         mNameField.setText(applicant.getmName());  
                         lNameField.setText(applicant.getlName());
@@ -223,7 +223,7 @@ public class Applicants {
                         jobField.setText(applicant.getJobTitle());
                         salaryField.setText(applicant.getSalary());
                         statusList.setSelectedItem(applicant.getApplicationStatus()); 
-                        propertyList.setSelectedItem(applicant.getPropertyId().toString());
+                        propertyList.setSelectedItem(applicant.getPropertyID().toString());
                         propertyList.setEnabled(false);
                         break;
                     }
@@ -239,7 +239,7 @@ public class Applicants {
                         creditField.getText(), moveField.getText(), employerField.getText(), 
                         jobField.getText(), salaryField.getText()); 
                     applicant.setApplicationStatus(statusList.getSelectedItem().toString().trim());
-                    applicant.setPropertyId(propertyId);
+                    applicant.setPropertyID(propertyId);
                     
                     boolean updateSuccess = dao.updateApplicant(applicant);
                     d.dispose();
@@ -405,7 +405,7 @@ public class Applicants {
             APPLICANTS_CONSTANTS.DROPDOWN_WIDTH, APPLICANTS_CONSTANTS.DROPDOWN_HEIGHT);
         propertyList.addItem("");
         for (PropertyEntity property : new PropertiesHibernateDao().propertyList()) {
-            propertyList.addItem(property.getPropertyID().toString());
+            propertyList.addItem(property.getPropertyId().toString());
         }
         d.add(propertyList);
     }

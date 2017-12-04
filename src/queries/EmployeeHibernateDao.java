@@ -70,7 +70,7 @@ public class EmployeeHibernateDao {
                 employee.setmName(results.getString(MNAME));
                 employee.setPhoneNumber(results.getString(PHONE_NUMBER));
                 employee.setPay(results.getBigDecimal(PAY));
-                employee.setPropertyId(results.getInt(EMP_PROP_PROPID));
+                employee.setPropertyID(results.getInt(EMP_PROP_PROPID));
                 employees.add(employee);
             }
             
@@ -125,8 +125,8 @@ public class EmployeeHibernateDao {
             stmt.setString(i++, StringUtils.isEmpty(emp.getPhoneNumber()) ? "%" : "%" + emp.getPhoneNumber() + "%");
             stmt.setFloat(i++, emp.getPay().floatValue());
             stmt.setBigDecimal(i++, emp.getPay());
-            stmt.setInt(i++, emp.getPropertyId());
-            stmt.setInt(i++, emp.getPropertyId());
+            stmt.setInt(i++, emp.getPropertyID());
+            stmt.setInt(i++, emp.getPropertyID());
             System.out.println(stmt);
             ResultSet results = stmt.executeQuery();
             
@@ -138,7 +138,7 @@ public class EmployeeHibernateDao {
                 employee.setmName(results.getString(MNAME));
                 employee.setPhoneNumber(results.getString(PHONE_NUMBER));
                 employee.setPay(results.getBigDecimal(PAY));
-                employee.setPropertyId(results.getInt(EMP_PROP_PROPID));
+                employee.setPropertyID(results.getInt(EMP_PROP_PROPID));
                 employees.add(employee);
             }
             
@@ -209,7 +209,7 @@ public class EmployeeHibernateDao {
             PreparedStatement stmt = conn.prepareStatement(INSERT_EMP_PROPERTY_RELATION);
             
             stmt.setInt(i++, emp.getSsn());
-            stmt.setInt(i++, emp.getPropertyId());
+            stmt.setInt(i++, emp.getPropertyID());
             stmt.setString(i++, null);
             
             stmt.executeUpdate();

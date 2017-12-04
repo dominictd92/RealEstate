@@ -121,10 +121,10 @@ public class PropertiesHibernateDao {
             pst.setInt(i++, property.getDryer());
             pst.setInt(i++, property.getDeckOrPatio());
             pst.setInt(i++, property.getBasement());
-            if (null == property.getTennantSsn()) {
-                pst.setString(i++, null);
-            } else {
+            if (property.getTennantSsn() != null) {
                 pst.setInt(i++, property.getTennantSsn());
+            } else {
+                pst.setString(i++, null);
             }
             pst.setInt(i++, property.getNumOfTennants());
             pst.execute();

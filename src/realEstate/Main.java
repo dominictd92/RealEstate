@@ -41,12 +41,14 @@ public class Main {
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
         Properties properties = new Properties();
+        Tennant tennant = new Tennant(); 
         //create all of the pages in the form or tabs
         tabbedPane.addTab("Home", Home.createHomePane());
         tabbedPane.addTab("Properties", properties.returnJPanel());
         tabbedPane.addTab("Applicants", Applicants.createApplicantsPane());
         tabbedPane.addTab("Employees", Employees.createEmployeesPane());
         tabbedPane.addTab("Sellers", Seller.createSellersPane());
+        tabbedPane.addTab("Tennant", tennant.returnJPanel());
         pane.add(tabbedPane, BorderLayout.CENTER);
     }
 

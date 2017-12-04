@@ -60,8 +60,8 @@ public class Employees {
             submit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    EmployeeEntity employee = new EmployeeEntity(Integer.parseInt(ssnField.getText()), fNameField.getText(), 
-                        mNameField.getText(), lNameField.getText(), 
+                    EmployeeEntity employee = new EmployeeEntity(Integer.parseInt(ssnField.getText()),  
+                        fNameField.getText(), mNameField.getText(), lNameField.getText(), 
                         BigDecimal.valueOf(Double.parseDouble(payField.getText())), phoneField.getText());
 
                     int propertyID = Integer.parseInt(propertyList.getSelectedItem().toString().trim());
@@ -138,7 +138,7 @@ public class Employees {
                     fNameField.getText().trim(), mNameField.getText().trim(), lNameField.getText().trim(), 
                     (StringUtils.isEmpty(payField.getText().trim()) ? BigDecimal.valueOf(Double.parseDouble("-1")) : 
                     BigDecimal.valueOf(Double.parseDouble(payField.getText()))), phoneField.getText());
-                employee.setPropertyId(StringUtils.isEmpty(propertyList.getSelectedItem().toString()) ? 
+                employee.setPropertyID(StringUtils.isEmpty(propertyList.getSelectedItem().toString()) ? 
                     -1 : Integer.parseInt(propertyList.getSelectedItem().toString()));
                 
                 List<EmployeeEntity> results = dao.getFilteredEmployees(employee);
@@ -185,7 +185,7 @@ public class Employees {
                 EMPLOYEE_CONSTANTS.DROPDOWN_WIDTH, EMPLOYEE_CONSTANTS.DROPDOWN_HEIGHT);
             List<EmployeeEntity> employees = dao.getAllEmployees();
             for (EmployeeEntity employee : employees) {
-                employeeDropdown.addItem(employee.getSsn() + "; " + employee.getPropertyId());
+                employeeDropdown.addItem(employee.getSsn() + "; " + employee.getPropertyID());
             }
             selectEmployee.add(employeeDropdown);
             
@@ -206,7 +206,7 @@ public class Employees {
                 getPropertyLabelsAndDropdown(d);
                 //set the fields based on their selection
                 for (EmployeeEntity employee : employees) {
-                    if (employee.getSsn() == employeeSsn && employee.getPropertyId() == propertyId) {
+                    if (employee.getSsn() == employeeSsn && employee.getPropertyID() == propertyId) {
                         fNameField.setText(employee.getfName()); 
                         mNameField.setText(employee.getmName());  
                         lNameField.setText(employee.getlName());
@@ -228,7 +228,7 @@ public class Employees {
                     EmployeeEntity employee = new EmployeeEntity(employeeSsn, fNameField.getText(), 
                         mNameField.getText(), lNameField.getText(), 
                         BigDecimal.valueOf(Double.parseDouble(payField.getText())), phoneField.getText());
-                    employee.setPropertyId(propertyId);
+                    employee.setPropertyID(propertyId);
                     
                     boolean updateSuccess = dao.updateEmployee(employee);
                     d.dispose();
@@ -330,7 +330,7 @@ public class Employees {
             EMPLOYEE_CONSTANTS.DROPDOWN_WIDTH, EMPLOYEE_CONSTANTS.DROPDOWN_HEIGHT);
         propertyList.addItem("");
         for (PropertyEntity property : new PropertiesHibernateDao().propertyList()) {
-            propertyList.addItem(property.getPropertyID().toString());
+            propertyList.addItem(property.getPropertyId().toString());
         }
         d.add(propertyList);
     }

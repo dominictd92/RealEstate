@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Tennant (
     f_name VARCHAR(45),
     m_name VARCHAR(45),
     l_name VARCHAR(45),
-    birthdate DATETIME,
+    birthdate VARCHAR(45),
     phoneNumber VARCHAR(45),
     car VARCHAR(45),
     workStatus VARCHAR(45),
@@ -94,6 +94,15 @@ CREATE TABLE IF NOT EXISTS Property (
     PRIMARY KEY (propertyID),
     FOREIGN KEY (Tennant_ssn) REFERENCES Tennant(ssn)
 );
+
+CREATE TABLE IF NOT EXISTS Tennant_Lives_In_Property (
+    Tennant_tennantSsn INT(11) NOT NULL,
+    Property_propertyID INT NOT NULL, 
+    PRIMARY KEY (Tennant_tennantSsn, Property_propertyID)
+    FOREIGN KEY (Tennant_tennantSsn) REFERENCES Tennant(ssn)
+    FOREIGN KEY (Property_propertyID) REFERENCES Property(propertyID)
+);
+
 CREATE TABLE IF NOT EXISTS Employee_Works_At_Property ( 
     Property_propertyID INT,
     Property_Tennant_ssn INT,

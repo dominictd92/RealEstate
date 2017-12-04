@@ -373,7 +373,7 @@ public class Seller {
             SELLER_CONSTANTS.DROPDOWN_WIDTH, SELLER_CONSTANTS.DROPDOWN_HEIGHT);
         propertyList.addItem("");
         for (PropertyEntity property : new PropertiesHibernateDao().propertyList()) {
-            propertyList.addItem(property.getPropertyID().toString());
+            propertyList.addItem(property.getPropertyId().toString());
         }
         d.add(propertyList);
     }

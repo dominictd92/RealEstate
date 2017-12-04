@@ -14,7 +14,22 @@ public class EmployeeEntity {
     private BigDecimal pay;
     private String phoneNumber;
     private Collection<EmployeeWorksAtPropertyEntity> employeeWorksAtPropertiesBySsn;
-
+    
+    private Integer propertyID;
+    
+    public EmployeeEntity() { 
+        //Empty Constructor
+    }
+    
+    public EmployeeEntity(int ssn, String fName, String mName, String lName, BigDecimal pay, String phone) {
+       this.ssn = ssn;
+       this.fName = fName; 
+       this.mName = mName;
+       this.lName = lName;
+       this.pay = pay;
+       this.phoneNumber = phone;
+    }
+    
     @Id
     @Column(name = "ssn", nullable = false)
     public int getSsn() {
@@ -74,6 +89,15 @@ public class EmployeeEntity {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+    
+    @Transient
+    public Integer getPropertyID() {
+        return propertyID;
+    }
+
+    public void setPropertyID(Integer propertyID) {
+        this.propertyID = propertyID;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -111,4 +135,18 @@ public class EmployeeEntity {
     public void setEmployeeWorksAtPropertiesBySsn(Collection<EmployeeWorksAtPropertyEntity> employeeWorksAtPropertiesBySsn) {
         this.employeeWorksAtPropertiesBySsn = employeeWorksAtPropertiesBySsn;
     }
+    
+    public Object[] getColumnArray() {
+          String[] columns = new String[] {
+              "SSN", "First Name", "Middle Name", "Last Name", "Pay", "Phone Number", "PropertyID"
+          };
+          return columns; 
+      }
+      
+      public Object[] getEmployeeArray() { 
+          Object[] rows = new Object[] {
+              this.ssn, this.fName, this.mName, this.lName, this.pay, this.phoneNumber, this.propertyID
+          };
+          return rows;
+      }
 }

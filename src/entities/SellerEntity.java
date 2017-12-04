@@ -1,5 +1,6 @@
 package entities;
 
+import java.math.BigDecimal;
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -16,6 +17,26 @@ public class SellerEntity {
     private String mName;
     private String lName;
     private Collection<SellerSellsPropertyEntity> sellerSellsPropertiesBySsn;
+    
+    private Integer propertyID;
+    private BigDecimal price;
+    
+    public SellerEntity() { 
+        //empty constructor
+    }
+    
+    public SellerEntity(int ssn, int zipCode, String address, String city, String state, String phone, 
+        String fName, String mName, String lName) {
+        this.ssn = ssn;
+        this.zipCode = zipCode;
+        this.streetAddress = address;
+        this.city = city;
+        this.state = state;
+        this.phoneNumber = phone;
+        this.fName = fName;
+        this.mName = mName;
+        this.lName = lName;
+    }
 
     @Id
     @Column(name = "ssn", nullable = false)
@@ -106,6 +127,22 @@ public class SellerEntity {
     public void setlName(String lName) {
         this.lName = lName;
     }
+    @Transient
+    public Integer getPropertyID() {
+        return propertyID;
+    }
+
+    public void setPropertyID(Integer propertyID) {
+        this.propertyID = propertyID;
+    }
+    @Transient
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -150,4 +187,20 @@ public class SellerEntity {
     public void setSellerSellsPropertiesBySsn(Collection<SellerSellsPropertyEntity> sellerSellsPropertiesBySsn) {
         this.sellerSellsPropertiesBySsn = sellerSellsPropertiesBySsn;
     }
+    
+    public Object[] getColumnArray() {
+          String[] columns = new String[] {
+              "SSN", "First Name", "Middle Name", "Last Name", "Address", "Zip Code",
+              "City", "State", "Phone Number", "PropertyID", "Price"
+          };
+          return columns; 
+      }
+      
+      public Object[] getSellerArray() { 
+          Object[] rows = new Object[] {
+              this.ssn, this.fName, this.mName, this.lName, this.streetAddress, this.zipCode,
+               this.city, this.state, this.phoneNumber, this.propertyID, this.price
+          };
+          return rows;
+      }
 }

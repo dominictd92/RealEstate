@@ -61,7 +61,7 @@ public class Properties extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblProp.getModel();
         Object[] row = new Object[14];
         for (int i = 0; i < list.size(); i++){
-            row[0] = list.get(i).getPropertyID();
+            row[0] = list.get(i).getPropertyId();
             row[1] = list.get(i).getStreetAddress();
             row[2] = list.get(i).getCity();
             row[3] = list.get(i).getState();

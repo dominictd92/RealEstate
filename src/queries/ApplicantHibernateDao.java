@@ -28,7 +28,6 @@ public class ApplicantHibernateDao {
     private static final String SALARY = "salary";
     private static final String APP_PROP_APPSSN = "Applicant_Ssn";
     private static final String APP_PROP_PROPID = "Property_propertyID";
-    private static final String APP_PROP_TENNSSN = "Property_Tennant_ssn";
     private static final String APP_PROP_STATUS = "applicationStatus";
     
     //Put all of the queries above so the document is readable
@@ -60,8 +59,7 @@ public class ApplicantHibernateDao {
             + " VALUES (?, ?, ?, ?)";
     public static final String UPDATE_APP_PROPERTY_RELATION = ""
             + "UPDATE Applicant_Applies_For_Property "
-            + "SET " + APP_PROP_APPSSN + " = ?, " + APP_PROP_PROPID + " = ?, " 
-            + APP_PROP_TENNSSN + " = ?," + APP_PROP_STATUS + " = ? "
+            + "SET " + APP_PROP_APPSSN + " = ?, " + APP_PROP_PROPID + " = ?, " + APP_PROP_STATUS + " = ? "
             + " WHERE " + APP_PROP_APPSSN + " = ? AND " + APP_PROP_PROPID + " = ?" ;
     
     public List<ApplicantEntity> getAllApplications() {
@@ -87,7 +85,7 @@ public class ApplicantHibernateDao {
                 applicant.setJobTitle(results.getString(JOB_TITLE));
                 applicant.setSalary(results.getString(SALARY));
                 applicant.setApplicationStatus(results.getString(APP_PROP_STATUS));
-                applicant.setPropertyId(results.getInt(APP_PROP_PROPID));
+                applicant.setPropertyID(results.getInt(APP_PROP_PROPID));
                 applicants.add(applicant);
             }
             
@@ -152,8 +150,8 @@ public class ApplicantHibernateDao {
             stmt.setString(i++, StringUtils.isEmpty(app.getJobTitle()) ? "%" : "%" + app.getJobTitle() + "%");
             stmt.setString(i++, StringUtils.isEmpty(app.getSalary()) ? "%" : "%" + app.getSalary() + "%");
             stmt.setString(i++, StringUtils.isEmpty(app.getApplicationStatus()) ? "%" : "%" + app.getApplicationStatus() + "%");
-            stmt.setInt(i++, app.getPropertyId());
-            stmt.setInt(i++, app.getPropertyId());
+            stmt.setInt(i++, app.getPropertyID());
+            stmt.setInt(i++, app.getPropertyID());
             
             ResultSet results = stmt.executeQuery();
             
@@ -171,7 +169,7 @@ public class ApplicantHibernateDao {
                 applicant.setJobTitle(results.getString(JOB_TITLE));
                 applicant.setSalary(results.getString(SALARY));
                 applicant.setApplicationStatus(results.getString(APP_PROP_STATUS));
-                applicant.setPropertyId(results.getInt(APP_PROP_PROPID));
+                applicant.setPropertyID(results.getInt(APP_PROP_PROPID));
                 applicants.add(applicant);
             }
             
@@ -248,11 +246,11 @@ public class ApplicantHibernateDao {
             PreparedStatement stmt = conn.prepareStatement(INSERT_APP_PROPERTY_RELATION);
             
             stmt.setInt(i++, app.getSsn());
-            stmt.setInt(i++, app.getPropertyId());
+            stmt.setInt(i++, app.getPropertyID());
             stmt.setString(i++, null);
             stmt.setString(i++, app.getApplicationStatus());
             stmt.setInt(i++, app.getSsn());
-            stmt.setInt(i++, app.getPropertyId());
+            stmt.setInt(i++, app.getPropertyID());
             
             stmt.executeUpdate();
             

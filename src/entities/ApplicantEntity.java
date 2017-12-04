@@ -19,6 +19,28 @@ public class ApplicantEntity {
     private String fName;
     private Collection<ApplicantAppliesForPropertyEntity> applicantAppliesForPropertiesBySsn;
 
+    private String applicationStatus;
+    private Integer propertyID;
+
+    public ApplicantEntity() {
+        //empty constructor
+    }
+    
+    public ApplicantEntity(Integer ssn, String fName, String mName, String lName, String address, String phone, 
+            String creditScore, String moveDate, String employer, String jobTitle, String salary) {
+        this.ssn = ssn;
+        this.fName = fName; 
+        this.mName = mName; 
+        this.lName = lName;
+        this.address = address; 
+        this.phoneNumber = phone;
+        this.creditScore = creditScore; 
+        this.moveDate = moveDate; 
+        this.employer = employer; 
+        this.jobTitle = jobTitle;
+        this.salary = salary;
+    }
+    
     @Id
     @Column(name = "ssn", nullable = false)
     public int getSsn() {
@@ -128,6 +150,25 @@ public class ApplicantEntity {
     public void setfName(String fName) {
         this.fName = fName;
     }
+    
+    @Transient
+    public String getApplicationStatus() {
+        return applicationStatus;
+    }
+
+    public void setApplicationStatus(String applicationStatus) {
+        this.applicationStatus = applicationStatus;
+    }
+    
+    @Transient
+    public Integer getPropertyID() {
+        return propertyID;
+    }
+
+    
+    public void setPropertyID(Integer propertyID) {
+        this.propertyID = propertyID;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -174,5 +215,24 @@ public class ApplicantEntity {
 
     public void setApplicantAppliesForPropertiesBySsn(Collection<ApplicantAppliesForPropertyEntity> applicantAppliesForPropertiesBySsn) {
         this.applicantAppliesForPropertiesBySsn = applicantAppliesForPropertiesBySsn;
+    }
+    
+       public Object[] getColumnArray() {
+        String[] columns = new String[] {
+            "SSN", "First Name", "Middle Name", "Last Name", "Address", "Phone Number",
+            "Move Date", "Credit Score", "Employer", "Job Title", "Salary", "Application Status", 
+            "PropertyID"
+        };
+        return columns; 
+    }
+    
+    public Object[] getApplicantArray() { 
+        Object[] rows = new Object[] {
+            this.ssn, this.fName, this.mName, this.lName,
+            this.address, this.phoneNumber, this.moveDate, this.creditScore,
+            this.employer, this.jobTitle, this.salary, this.applicationStatus, 
+            this.propertyID
+        };
+        return rows;
     }
 }
