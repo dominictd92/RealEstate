@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS Property (
 CREATE TABLE IF NOT EXISTS Tennant_Lives_In_Property (
     Tennant_tennantSsn INT(11) NOT NULL,
     Property_propertyID INT NOT NULL, 
-    PRIMARY KEY (Tennant_tennantSsn, Property_propertyID)
-    FOREIGN KEY (Tennant_tennantSsn) REFERENCES Tennant(ssn)
+    PRIMARY KEY (Tennant_tennantSsn, Property_propertyID),
+    FOREIGN KEY (Tennant_tennantSsn) REFERENCES Tennant(ssn),
     FOREIGN KEY (Property_propertyID) REFERENCES Property(propertyID)
 );
 

@@ -6,7 +6,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "Applicant", schema = "RealEstate", catalog = "")
 public class ApplicantEntity {
-    private int ssn;
+    private Integer ssn;
     private String lName;
     private String mName;
     private String creditScore;
@@ -43,11 +43,11 @@ public class ApplicantEntity {
     
     @Id
     @Column(name = "ssn", nullable = false)
-    public int getSsn() {
+    public Integer getSsn() {
         return ssn;
     }
 
-    public void setSsn(int ssn) {
+    public void setSsn(Integer ssn) {
         this.ssn = ssn;
     }
 

@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS State;
 DROP TABLE IF EXISTS Dependent_Lives_with_Tennant;
 DROP TABLE IF EXISTS Property_has_Expense;
 DROP TABLE IF EXISTS Property_has_Amenity;
@@ -15,3 +14,4 @@ DROP TABLE IF EXISTS Tennant;
 DROP TABLE IF EXISTS Dependent;
 DROP TABLE IF EXISTS Seller;
 DROP TABLE IF EXISTS Repair;
+DROP TABLE IF EXISTS State;

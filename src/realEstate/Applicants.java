@@ -5,6 +5,7 @@ import entities.PropertyEntity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -61,13 +62,13 @@ public class Applicants {
             submit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    ApplicantEntity applicant = new ApplicantEntity(Integer.getInteger(ssnField.getText()), fNameField.getText(), 
+                    ApplicantEntity applicant = new ApplicantEntity(Integer.parseInt(ssnField.getText()), fNameField.getText(), 
                             mNameField.getText(), lNameField.getText(), addressField.getText(), phoneField.getText(),
                             creditField.getText(), moveField.getText(), employerField.getText(), 
                             jobField.getText(), salaryField.getText());
                     
                     applicant.setApplicationStatus(statusList.getSelectedItem().toString());
-                    int propertyID = Integer.parseInt(propertyList.getSelectedItem().toString().trim());
+                    int propertyID = Integer.parseInt(StringUtils.trimAllWhitespace(propertyList.getSelectedItem().toString()));
                     
                     String result;
                     if (dao.insertApplicant(applicant) && dao.insertApplicantPropertyRelationship(applicant, propertyID)) {
@@ -136,7 +137,7 @@ public class Applicants {
             submit.setBounds(APPLICANTS_CONSTANTS.SUBMIT_POSITION_X, APPLICANTS_CONSTANTS.SUBMIT_POSITION_Y, 
                 APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
             submit.addActionListener((ActionEvent ae) -> {
-                ApplicantEntity applicant = new ApplicantEntity(Integer.getInteger(ssnField.getText()), fNameField.getText(), 
+                ApplicantEntity applicant = new ApplicantEntity(Integer.parseInt(ssnField.getText()), fNameField.getText(), 
                     mNameField.getText(), lNameField.getText(), addressField.getText(), phoneField.getText(),
                     creditField.getText(), moveField.getText(), employerField.getText(), 
                     jobField.getText(), salaryField.getText()); 
@@ -209,7 +210,7 @@ public class Applicants {
                 getPropertyLabelsAndDropdown(d);
                 //set the fields based on their selection
                 for (ApplicantEntity applicant : applicants) {
-                    if (applicant.getSsn() == applicantSsn && applicant.getPropertyID().equals(propertyId)) {
+                    if (Objects.equals(applicant.getSsn(), applicantSsn) && applicant.getPropertyID().equals(propertyId)) {
                         fNameField.setText(applicant.getfName()); 
                         mNameField.setText(applicant.getmName());  
                         lNameField.setText(applicant.getlName());
