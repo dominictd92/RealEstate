@@ -8,6 +8,11 @@ public class AmenityEntity {
     private int amenityid;
     private String amenity;
 
+    public AmenityEntity(int amenityid, String amenity) {
+        this.amenityid = amenityid;
+        this.amenity = amenity;
+    }
+
     @Id
     @Column(name = "amenityid")
     public int getAmenityid() {
