@@ -47,4 +47,7 @@ public class APP_CONSTANTS {
         
 	//Properties Constants
 	public final static String PROPERTIES = "Properties";
+
+	//Properties Constants
+	public final static String SELLER = "Seller";
 }
