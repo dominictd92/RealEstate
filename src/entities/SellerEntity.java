@@ -15,6 +15,23 @@ public class SellerEntity {
     private String mName;
     private String lName;
 
+    public SellerEntity(int ssn, Integer zipCode, String streetAddress, String city, String state, String phoneNumber, String fName, String mName, String lName) {
+        this.ssn = ssn;
+        this.zipCode = zipCode;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
+        this.fName = fName;
+        this.mName = mName;
+        this.lName = lName;
+    }
+
+
+
+    public SellerEntity() {
+    }
+
     @Id
     @Column(name = "ssn")
     public int getSsn() {
