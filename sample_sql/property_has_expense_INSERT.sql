@@ -1,0 +1,12 @@
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('1', '1', '1');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('2', '2', '2');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('3', '3', '3');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('4', '4', '4');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('1', '5', '5');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('2', '6', '6');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('3', '7', '7');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('4', '8', '8');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('1', '9', '9');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('2', '1', '10');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('3', '2', '11');
+INSERT INTO `RealEstate`.`Property_has_Expense` (`Expense_expenseId`, `Property_propertyID`, `Property_ExpenseID`) VALUES ('4', '3', '12');
