@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import utilities.DATABASE_CONSTANTS;
 /**
  *
  * @author bchar
@@ -57,7 +58,7 @@ public class RTENANT extends javax.swing.JFrame {
              Tenant tenant;
              while(rs.next())
              {
-                tenant=new Tenant(rs.getInt("ssn"), rs.getString("f_name") ,rs.getString("m_name") ,rs.getString("l_name") ,rs.getString("birthdate") ,rs.getString("phoneNumber") ,rs.getString("car") ,rs.getString("workStatus") ,rs.getString("rentersInsurance"), rs.getString("rent"), rs.getTimestamp("leaseEndDate"));
+                tenant=new Tenant(rs.getInt("ssn"), rs.getString("f_name") ,rs.getString("m_name") ,rs.getString("l_name") ,rs.getString("birthdate") ,rs.getString("phoneNumber") ,rs.getString("car") ,rs.getString("workStatus") ,rs.getString("rentersInsurance"), rs.getString("rent"), rs.getDate("leaseEndDate"));
                 tenantList.add(tenant);
              }  
         }
@@ -130,7 +131,7 @@ public class RTENANT extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTenant.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTenant.setText("Tenant# :");
+        lblTenant.setText("         Tenant# :");
 
         txtTenNum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -150,6 +151,11 @@ public class RTENANT extends javax.swing.JFrame {
         txtLast.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtDob.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDobActionPerformed(evt);
+            }
+        });
 
         txtPhne.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -394,13 +400,14 @@ public class RTENANT extends javax.swing.JFrame {
             pst.setString (10, txtMRent.getText());
             pst.setString (11, txtLED.getText());
             pst.execute();
-
+            DefaultTableModel model = (DefaultTableModel)tblTen.getModel();
+            model.setRowCount(0);
+            clrFields();
             JOptionPane.showMessageDialog(null, "Entry Saved");
 
             show_tenants();
-            clrFields();
-            }
 
+            }
         }
 
         catch(Exception e)
@@ -416,7 +423,7 @@ public class RTENANT extends javax.swing.JFrame {
         try{
             btnInsert.setEnabled(true);
             Class.forName(DATABASE_CONSTANTS.DRIVER);
-            String url = "jdbc:mysql://localhost:3306/";
+            String url = "jdbc:mysql://localhost:3306/ ";
             Connection conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
             int row = tblTen.getSelectedRow();
             String value = (tblTen.getModel().getValueAt(row, 10).toString());
@@ -462,15 +469,14 @@ public class RTENANT extends javax.swing.JFrame {
         // Update existing tenant records
         try{
             btnInsert.setEnabled(true);
-            Class.forName(DATABASE_CONSTANTS.DRIVER);
-            String url = "jdbc:mysql://localhost:3306/";
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/ ";
             Connection conn = DriverManager.getConnection(DATABASE_CONSTANTS.URL, DATABASE_CONSTANTS.USERNAME, DATABASE_CONSTANTS.PASSWORD);
             int row = tblTen.getSelectedRow();
             String value = (tblTen.getModel().getValueAt(row, 10).toString());
             String sql = "DELETE FROM shd.tennant where ssn="+value;
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.execute();
-
+            pst.executeUpdate();
             DefaultTableModel model = (DefaultTableModel)tblTen.getModel();
             model.setRowCount(0);
             clrFields();
@@ -557,6 +563,11 @@ public class RTENANT extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblTenMouseClicked
 
+    private void txtDobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDobActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtDobActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -627,9 +638,9 @@ public class RTENANT extends javax.swing.JFrame {
     
         private int ssn;
         private String f_name, m_name, l_name, birthdate, phoneNumber, car, workStatus, rentersInsurance, rent;
-        private Timestamp leaseEndDate;
+        private Date leaseEndDate;
       
-        public Tenant(int ssn, String f_name, String m_name, String l_name, String birthdate, String phoneNumber, String car, String workStatus, String rentersInsurance, String rent, Timestamp leaseEndDate) {
+        public Tenant(int ssn, String f_name, String m_name, String l_name, String birthdate, String phoneNumber, String car, String workStatus, String rentersInsurance, String rent, Date leaseEndDate) {
             this.ssn=ssn;
             this.f_name=f_name;
             this.m_name=m_name;
@@ -682,7 +693,7 @@ public class RTENANT extends javax.swing.JFrame {
             return rent;
         }
     
-        public Timestamp getLeaseEndDate() {
+        public Date getLeaseEndDate() {
             return leaseEndDate;
         }
     }
