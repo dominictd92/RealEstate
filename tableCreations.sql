@@ -218,3 +218,32 @@ values
 (NULL,'WV'),
 (NULL,'WI'),
 (NULL,'WY');
+
+CREATE TABLE IF NOT EXISTS Bldg_Style (
+bldg_id smallint  unsigned not null auto_increment,
+bldg_style varchar(45),
+PRIMARY KEY (bldg_id)
+);
+INSERT INTO Bldg_Style
+VALUES
+(NULL, '--'),
+(NULL, 'Townhouse'),
+(NULL, 'Single Family'),
+(NULL, 'Detached'),
+(NULL, 'Semi-Detached'),
+(NULL, 'Trailer');
+
+CREATE TABLE IF NOT EXISTS Parking_Style (
+parkstyle_id  smallint  unsigned not null AUTO_INCREMENT,
+park_style varchar(45) ,
+PRIMARY KEY (parkstyle_id)
+);
+INSERT INTO Parking_Style
+VALUES
+(NULL, '--'),
+(NULL, 'Driveway'),
+(NULL, '1 Car Garage'),
+(NULL, '2 Car Garage'),
+(NULL, '3 Car Garage'),
+(NULL, 'Parking Garage'),
+(NULL, 'Lawn');

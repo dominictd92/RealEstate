@@ -137,10 +137,10 @@ public class Applicants {
             submit.setBounds(APPLICANTS_CONSTANTS.SUBMIT_POSITION_X, APPLICANTS_CONSTANTS.SUBMIT_POSITION_Y, 
                 APP_CONSTANTS.BUTTON_WIDTH, APP_CONSTANTS.BUTTON_HEIGHT);
             submit.addActionListener((ActionEvent ae) -> {
-                ApplicantEntity applicant = new ApplicantEntity(Integer.parseInt(ssnField.getText()), fNameField.getText(), 
-                    mNameField.getText(), lNameField.getText(), addressField.getText(), phoneField.getText(),
-                    creditField.getText(), moveField.getText(), employerField.getText(), 
-                    jobField.getText(), salaryField.getText()); 
+                ApplicantEntity applicant = new ApplicantEntity(Integer.parseInt(StringUtils.isEmpty(ssnField.getText()) ? "-1" : ssnField.getText()), 
+                    fNameField.getText(), mNameField.getText(), lNameField.getText(), 
+                    addressField.getText(), phoneField.getText(), creditField.getText(), 
+                    moveField.getText(), employerField.getText(), jobField.getText(), salaryField.getText()); 
                 applicant.setApplicationStatus(statusList.getSelectedItem().toString());
                 applicant.setPropertyID(StringUtils.isEmpty(propertyList.getSelectedItem().toString()) ? 
                     -1 : Integer.parseInt(propertyList.getSelectedItem().toString()));

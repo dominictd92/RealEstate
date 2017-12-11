@@ -2,8 +2,6 @@ package realEstate;
  
 import java.awt.BorderLayout;
 import java.awt.Container;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,36 +10,16 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 
 import utilities.APP_CONSTANTS;
 
 public class Main {
     public static JFrame frame; 
-    //private static final SessionFactory ourSessionFactory;
     
-//    static {
-//        try {
-//            Configuration configuration = new Configuration();
-//            configuration.configure();
-//
-//            ourSessionFactory = configuration.buildSessionFactory();
-//        } catch (Throwable ex) {
-//            throw new ExceptionInInitializerError(ex);
-//        }
-//     }
-     
-//    public static Session getSession() throws HibernateException {
-//        return ourSessionFactory.openSession();
-//    }
     public void addComponentsToPane(Container pane) {
         JTabbedPane tabbedPane = new JTabbedPane();
-        Properties properties = new Properties();
-        Tennant tennant = new Tennant(); 
+        Property properties = new Property();
+        Tennant tennant = new Tennant();
         //create all of the pages in the form or tabs
         tabbedPane.addTab("Home", Home.createHomePane());
         tabbedPane.addTab("Properties", properties.returnJPanel());
@@ -75,17 +53,7 @@ public class Main {
     public static void main(String[] args) {
         //final Session session = getSession();
         try {
-//            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-//            for (EntityType<?> entityType : metamodel.getEntities()) {
-//                final String entityName = entityType.getName();
-//                final Query query = session.createQuery("from " + entityName);
-//                System.out.println("executing: " + query.getQueryString());
-//                for (Object o : query.list()) {
-//                    System.out.println("  " + o);
-//                }
-//            }
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {
@@ -96,9 +64,7 @@ public class Main {
             ex.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            //session.close();
-        }
+        } 
         /* Turn off metal's use of bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
          

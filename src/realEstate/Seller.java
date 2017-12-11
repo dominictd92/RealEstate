@@ -37,7 +37,7 @@ public class Seller {
     	JPanel card1 = new JPanel();
         card1.setLayout(null);
         
-    	JLabel header = new JLabel(APP_CONSTANTS.APPLICANTS);
+    	JLabel header = new JLabel("Seller");
         header.setFont(APP_CONSTANTS.HEADER_FONT);
         header.setBounds(APP_CONSTANTS.HEADER_X, APP_CONSTANTS.HEADER_Y, APP_CONSTANTS.PAGE_TITLE_WIDTH, APP_CONSTANTS.PAGE_TITLE_HEIGHT);
         header.setHorizontalAlignment(JLabel.CENTER);

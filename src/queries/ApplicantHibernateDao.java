@@ -16,9 +16,9 @@ public class ApplicantHibernateDao {
     //constants for the objects so that database names aren't mixed up
     //if one is changed, change the constant and it's changed for all of the queries
     private static final String SSN = "ssn";
-    private static final String FNAME = "f_Name";
-    private static final String LNAME = "l_Name";
-    private static final String MNAME = "m_Name";
+    private static final String FNAME = "f_name";
+    private static final String LNAME = "l_name";
+    private static final String MNAME = "m_name";
     private static final String CREDIT_SCORE = "creditScore";
     private static final String ADDRESS = "address";
     private static final String MOVE_DATE = "moveDate";

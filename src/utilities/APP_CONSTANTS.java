@@ -29,7 +29,7 @@ public class APP_CONSTANTS {
 	
 	//Home Constants
 	public final static String HOME = "SHD Real Estate Investments";
-	public final static String DEVELOPERS = "Creators: Charles Carr, Dominic Dangerfield, Austin Dase, Justin Lewis, Emmanuel Teko";
+	public final static String DEVELOPERS = "Creators: Charles Carr, Dominic Dangerfield, Austin Dase, Justin Lewis";
 	public final static String HOME_INFO = "This application maintains the SHD Real Estate Investments. The data from here is connected"
 		+ " to the servers \nof Towson University.";
 	public final static int DEVELOPERS_HEIGHT = 25;
