@@ -82,8 +82,12 @@ public class Property extends javax.swing.JFrame {
     public void show_properties() {
         ArrayList<Prop> list = propertyList();
         DefaultTableModel model = (DefaultTableModel)tblProp.getModel();
+       
         Object[] row = new Object[17];
-        for (int i=0;i<list.size();i++){
+        for (int i = model.getRowCount(); i > 0; i--) { 
+            model.removeRow(i - 1);
+        }
+        for (int i=0; i<list.size(); i++){
             
             row[0]=list.get(i).getstreetAddress();
             row[1]=list.get(i).getCity();

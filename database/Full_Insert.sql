@@ -151,8 +151,8 @@ INSERT INTO `adase1db`.`Seller` (`ssn`, `zipCode`, `streetAddress`, `city`, `Sta
 INSERT INTO `adase1db`.`Seller` (`ssn`, `zipCode`, `streetAddress`, `city`, `State`, `phoneNumber`, `f_name`, `m_name`, `l_name`) VALUES ('523456789', '52345', '1 circle rd', 'Towson', 'MD', '123456784', 'Beth', 'E', 'Smmither');
 INSERT INTO `adase1db`.`Seller` (`ssn`, `zipCode`, `streetAddress`, `city`, `State`, `phoneNumber`, `f_name`, `m_name`, `l_name`) VALUES ('623456789', '62345', '2 circle rd', 'Towson', 'MD', '123456785', 'Alice', 'F', 'Doe');
 INSERT INTO `adase1db`.`Seller` (`ssn`, `zipCode`, `streetAddress`, `city`, `State`, `phoneNumber`, `f_name`, `m_name`, `l_name`) VALUES ('723456789', '72345', '3 circle rd', 'Towson', 'MD', '123456786', 'Janice', 'G', 'Doese');
-INSERT INTO `adase1db`.`Seller` (`ssn`, `zipCode`, `streetAddress`, `city`, `State`, `phoneNumber`, `f_name`, `m_name`, `l_name`) VALUES ('823456789', '82345', '4 circle rd', 'Towson', 'MD', '123456787', 'Tom', 'H', 'Dough');
-INSERT INTO `adase1db`.`Seller` (`ssn`, `zipCode`, `streetAddress`, `city`, `State`, `phoneNumber`, `f_name`, `m_name`, `l_name`) VALUES ('923456789', '92345', '5 circle rd', 'Towson', 'MD', '123456788', 'Adam', 'I', 'Don');
+INSERT INTO Seller (`ssn`, `zipCode`, `streetAddress`, `city`, `State`, `phoneNumber`, `f_name`, `m_name`, `l_name`) VALUES ('823456789', '82345', '4 circle rd', 'Towson', 'MD', '123456787', 'Tom', 'H', 'Dough');
+INSERT INTO Seller (`ssn`, `zipCode`, `streetAddress`, `city`, `State`, `phoneNumber`, `f_name`, `m_name`, `l_name`) VALUES ('923456789', '92345', '5 circle rd', 'Towson', 'MD', '123456788', 'Adam', 'I', 'Don');
 
 
 
@@ -167,13 +167,11 @@ INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_property
 INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('823456789', '8',  '800000');
 INSERT INTO `adase1db`.`Seller_Sells_Property` (`Seller_ssn`, `Property_propertyID`,  `price`) VALUES ('923456789', '9',  '700000');
 
-
-
 INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456789', 'Tom', 'T', 'Smith', '1990-01-01 00:00:00', '55555522', 'Yes', 'Yes', 'Yes', '700', '2018-01-01 00:00:00');
 INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456788', 'Jeff', 'T', 'Doe', '1990-01-01 00:00:00', '55555533', 'Yes', 'Yes', 'Yes', '750', '2018-01-02 00:00:00');
 INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456787', 'Alex', 'T', 'Smith', '1990-01-01 00:00:00', '55555544', 'Yes', 'Yes', 'Yes', '800', '2018-01-03 00:00:00');
 INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456786', 'John', 'T', 'Doe', '1990-01-01 00:00:00', '55555555', 'Yes', 'Yes', 'Yes', '850', '2018-02-01 00:00:00');
 INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456785', 'Jane', 'T', 'Davis', '1990-01-01 00:00:00', '55555566', 'No', 'Yes', 'Yes', '900', '2018-02-01 00:00:00');
 INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456784', 'Julie', 'T', 'Doe', '1990-01-01 00:00:00', '55555577', 'Yes', 'Yes', 'Yes', '1000', '2018-03-01 00:00:00');
-INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456783', 'Tina', 'T', 'Smithers', '1990-01-01 00:00:00', '55555588', 'No', 'Yes', 'Yes', '1100', '2018-04-01 00:00:00');
-INSERT INTO `adase1db`.`Tennant` (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456782', 'Sam', 'T', 'Smithy', '1990-01-01 00:00:00', '55555599', 'No', 'No', 'Yes', '1200', '2018-05-01 00:00:00');
+INSERT INTO Tennant (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456783', 'Tina', 'T', 'Smithers', '1990-01-01 00:00:00', '55555588', 'No', 'Yes', 'Yes', '1100', '2018-04-01 00:00:00');
+INSERT INTO Tennant (`ssn`, `f_name`, `m_name`, `l_name`, `birthdate`, `phoneNumber`, `car`, `workStatus`, `rentersInsurance`, `rent`, `leaseEndDate`) VALUES ('423456782', 'Sam', 'T', 'Smithy', '1990-01-01 00:00:00', '55555599', 'No', 'No', 'Yes', '1200', '2018-05-01 00:00:00');

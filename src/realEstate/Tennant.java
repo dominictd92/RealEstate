@@ -68,6 +68,11 @@ public class Tennant extends javax.swing.JFrame {
         ArrayList<Tenant> list = tenantList();
         DefaultTableModel model = (DefaultTableModel)tblTen.getModel();
         Object[] row = new Object[11];
+        
+         for (int i = model.getRowCount(); i > 0; i--) { 
+            model.removeRow(i - 1);
+        }
+         
         for (int i=0;i<list.size();i++){
             
             row[0]=list.get(i).getFname();

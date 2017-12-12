@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Tennant (
     workStatus VARCHAR(45),
     rentersInsurance VARCHAR(45),
     rent DECIMAL(13,2),
-    leaseEndDate DATETIME, 
+    leaseEndDate VARCHAR(20), 
     PRIMARY KEY (ssn)
 );
 CREATE TABLE IF NOT EXISTS Dependent (
